@@ -5,12 +5,6 @@ import { Observable, Subject} from 'rxjs';
 import { AppSettings } from '../_helpers/settings';
 import { RegisterData } from '../_models/registerData';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
-
 @Injectable({
   providedIn: 'root'
 })
