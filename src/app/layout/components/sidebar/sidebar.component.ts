@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -14,7 +15,7 @@ export class SidebarComponent implements OnInit {
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(public router: Router) {
+    constructor(public router: Router, private authenticationService: AuthenticationService) {
 
         this.router.events.subscribe(val => {
             if (
@@ -62,7 +63,9 @@ export class SidebarComponent implements OnInit {
         dom.classList.toggle(this.pushRightClass);
     }
 
-    onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+    logout() {
+        console.log('Clicked on log out');
+        this.authenticationService.logout();
+        this.router.navigate(['/login']);
     }
 }

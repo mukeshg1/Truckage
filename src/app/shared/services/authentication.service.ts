@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { RegisterData } from '../_models/registerData';
+import { RegisterData } from '../models/registerData';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -19,9 +19,8 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(LoginEmail: string, loginPassword: string) {
-        console.log('Hi! From other side.');
-        return this.http.post<any>(`/users/authenticate`, { LoginEmail, loginPassword })
+    login(username: string, password: string) {
+        return this.http.post<any>(`/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
@@ -35,6 +34,7 @@ export class AuthenticationService {
     }
 
     logout() {
+        console.log('Clicked on log out service.');
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);

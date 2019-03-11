@@ -73,7 +73,7 @@
                 <li class="nested" [class.expand]="showMenu === 'profile'">
                     <ul class="submenu">
                         <li>
-                            <a href="javascript:void(0)">
+                            <a [routerLink]="['/profile']">
                                 <span><i class="fa fa-fw fa-user"></i> {{ 'Profile' }}</span>
                             </a>
                         </li>
@@ -88,7 +88,7 @@
                             </a>
                         </li>
                         <li>
-                            <a [routerLink]="['/login']" (click)="onLoggedout()">
+                            <a [routerLink]="['/login']" (click)="logout()">
                                 <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' }}</span>
                             </a>
                         </li>

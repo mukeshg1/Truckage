@@ -5,8 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../_helpers/must-match.validator';
 
 import { routerTransition } from '../router.animations';
-import { UserserviceService } from '../_services/userservice.service';
-import { RegisterData } from '../_models/registerData';
+import { UserserviceService } from '../shared/services/userservice.service';
+import { RegisterData } from '../shared/models/registerData';
 
 @Component({
     selector: 'app-signup',
