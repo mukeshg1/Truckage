@@ -5,7 +5,8 @@ $topnav-background-color: #222;
     z-index: 1000;
     top: 56px;
     left: 235px;
-    width: 235px;
+    width: 240px;
+    margin-top: 1px;
     margin-left: -235px;
     margin-bottom: 48px;
     border: none;
@@ -81,7 +82,7 @@ $topnav-background-color: #222;
             background: darken($topnav-background-color, 5%);
         }
         .panel-collapse {
-            border-radious: 0;
+            border-radius: 0;
             border: none;
             .panel-body {
                 .list-group-item {
@@ -151,18 +152,18 @@ $topnav-background-color: #222;
 }
 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 0px rgba(255, 255, 255, 1);
+    box-shadow: inset 0 0 0px rgba(255, 255, 255, 1);
     border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 3px;
-    -webkit-box-shadow: inset 0 0 3px rgba(255, 255, 255, 1);
+    box-shadow: inset 0 0 3px rgba(255, 255, 255, 1);
 }
 
 .toggle-button {
     position: fixed;
-    width: 236px;
+    width: 240px;
     cursor: pointer;
     padding: 12px;
     bottom: 0;

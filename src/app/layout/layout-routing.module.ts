@@ -25,28 +25,20 @@ const routes: Routes = [
                 loadChildren: './tables/tables.module#TablesModule'
             },
             {
-                path: 'forms',
-                loadChildren: './form/form.module#FormModule'
-            },
-            {
-                path: 'bs-element',
-                loadChildren: './bs-element/bs-element.module#BsElementModule'
-            },
-            {
-                path: 'grid',
-                loadChildren: './grid/grid.module#GridModule'
-            },
-            {
-                path: 'components',
-                loadChildren: './bs-component/bs-component.module#BsComponentModule'
-            },
-            {
-                path: 'blank-page',
-                loadChildren: './blank-page/blank-page.module#BlankPageModule'
-            },
-            {
                 path: 'profile',
                 loadChildren: './profile/profile.module#ProfileModule'
+            },
+            {
+                path: 'driver',
+                loadChildren: './driver/driver.module#DriverModule'
+            },
+            {
+                path: 'trips',
+                loadChildren: './trips/trips.module#TripsModule'
+            },
+            {
+                path: 'feedback',
+                loadChildren: './feedback/feedback.module#FeedbackModule'
             }
         ]
     }
