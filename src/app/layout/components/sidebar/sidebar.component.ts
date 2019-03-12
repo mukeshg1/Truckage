@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { AuthenticationService } from '../../../shared/services/authentication.service';
 
 @Component({
     selector: 'app-sidebar',

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject} from 'rxjs';
 
-import { AppSettings } from '../../_helpers/settings';
-import { RegisterData } from '../../_models/registerData';
+import { AppSettings } from '../helpers/settings';
+import { RegisterData } from '../models/registerData';
 
 @Injectable({
   providedIn: 'root'
