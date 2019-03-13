@@ -19,10 +19,8 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    // login(loginData: RegisterData) {
-    //     return this.http.post<any>('http://172.16.9.102/industrial-transportation-slim/public/login', loginData)
     login(username: string, password: string) {
-        return this.http.post<any>(`/users/authenticate`, { username, password })
+        return this.http.post<any>('http://172.16.9.102/industrial-transportation-slim/public/login', { username, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {

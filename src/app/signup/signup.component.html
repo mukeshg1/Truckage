@@ -37,11 +37,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <select class="form-control input-underline">
-                                    <option disabled>Select User Type*</option>
-                                    <option class="option">Vehicle Owner/Client</option>
-                                    <option class="option">Vehicle Borrower/Customer</option>
-                                    <option class="option">Driver</option>
+                                <select class="form-control input-underline" formControlName="userType">
+                                    <option class="option" *ngFor="let option of userType">{{ option }}</option> 
                                 </select>
                             </div>
                         </div>                    

@@ -19,6 +19,9 @@ export class SignupComponent implements OnInit {
     submitted = false;
     data: RegisterData;
 
+    userType: string[] = ['Vehicle Owner/Client', 'Vehicle Borrower/Customer', 'Driver'];
+    default = 'Vehicle Owner/Client';
+
     constructor(private formBuilder: FormBuilder, private userService: UserserviceService) {    }
 
     ngOnInit() {
@@ -27,7 +30,8 @@ export class SignupComponent implements OnInit {
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(5)]],
-            confirmPassword: ['', Validators.required]
+            confirmPassword: ['', Validators.required],
+            userType: ['', Validators.required]
         }, {
             validator: MustMatch('password', 'confirmPassword')
         });
