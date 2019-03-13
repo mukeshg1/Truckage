@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
             loginPassword: ['', Validators.required]
         });
         // reset login status
-        this.authenticationService.logout();
+        // this.authenticationService.logout();
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
         }
         // alert ('Login SUCCESS!!:-' + JSON.stringify(this.loginForm.value));
         this.loading = true;
+        // this.authenticationService.login(this.loginForm.value)
         this.authenticationService.login(this.f.loginEmail.value, this.f.loginPassword.value)
             .pipe(first())
             .subscribe(
@@ -60,6 +61,5 @@ export class LoginComponent implements OnInit {
                     this.error = error;
                     this.loading = false;
                 });
-
     }
 }
