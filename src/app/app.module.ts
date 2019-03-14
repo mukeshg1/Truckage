@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatInputModule } from '@angular/material/input';
@@ -55,7 +57,8 @@ export const createTranslateLoader = (http: HttpClient) => {
         MatSelectModule,
         MatCheckboxModule,
         MatListModule,
-        MatIconModule
+        MatIconModule,
+        NgbModule
     ],
     declarations: [AppComponent],
     providers: [

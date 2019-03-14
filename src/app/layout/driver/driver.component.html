@@ -16,7 +16,24 @@
         Licence Number: <b>{{ driverLicence }}</b>
       </div>
       <hr>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Click here to know more about {{ driverName }}</button>
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Driver Details</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross Click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label>Name:&nbsp;</label><b>{{ driverName }}</b><br>
+          <label>About:&nbsp;</label><b>{{ driverName }}&nbsp;{{ driverAbout }}</b><br>
+          <label>Licence No.:&nbsp;</label><b>{{ driverLicence }}</b>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
+        </div>
+      </ng-template>
+      <button type="button" class="btn btn-outline-primary mb-2 mr-2" (click)="openVerticallyCentered(content)">Click here to know more about {{ driverName }}</button>
     </div>
   </div>
 </div>
+
