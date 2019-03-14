@@ -1,29 +1,48 @@
 <div [@routerTransition]>
   <app-page-header [heading]="'Trips'" [icon]="'fa-truck'"></app-page-header>
-  <div class="card">
-    <div class="card-header">
-      Ongoing Trips
-    </div>
-    <div class="card-body">
-        You have no ongoing trips.
-    </div>
-  </div>
 
-  <div style="margin: 10px 0;" class="card">
-    <div class="card-header">
-      Upcoming Trips
-    </div>
-    <div class="card-body">
-      You don't have any upcoming trips.
-    </div>
-  </div>
+  <ngb-tabset>
+  <!-- Tab for OngoingTrips -->
+  <ngb-tab title="Ongoing Trips">
+    <ng-template ngbTabContent>
+      <div style="margin: 10px 0;" class="card">
+        <div class="card-header">
+          Ongoing Trips
+        </div>
+        <div class="card-body">
+          You have no ongoing trips.
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
 
-  <div class="card">
-    <div class="card-header">
-      Completed Trips
-    </div>
-    <div class="card-body">
-      You haven't completed any trips.
-    </div>
-  </div>
+  <!-- Tab for Upcoming Trips -->
+  <ngb-tab>
+    <ng-template ngbTabTitle>Upcoming Trips</ng-template>
+    <ng-template ngbTabContent>
+      <div style="margin: 10px 0;" class="card">
+        <div class="card-header">
+          Upcoming Trips
+        </div>
+        <div class="card-body">
+          You don't have any upcoming trips.
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+
+  <!-- Tab For Completed Trips -->
+  <ngb-tab title="Completed Trips">
+    <ng-template ngbTabContent>
+      <div style="margin: 10px 0;" class="card">
+        <div class="card-header">
+          Completed Trips
+        </div>
+        <div class="card-body">
+          You haven't completed any trips.
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>  
 </div>

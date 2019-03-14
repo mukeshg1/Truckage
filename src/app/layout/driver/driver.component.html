@@ -1,5 +1,6 @@
 <div [@routerTransition]>
   <app-page-header [heading]="'Drivers'" [icon]="'fa-id-badge'"></app-page-header>
+  <ngb-pagination class="d-flex justify-content-end" [collectionSize]="size" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"></ngb-pagination>
   <div class="card" style="width: 25rem;">
     <div class="card-header">
       Driver Details
@@ -35,5 +36,7 @@
       <button type="button" class="btn btn-outline-primary mb-2 mr-2" (click)="openVerticallyCentered(content)">Click here to know more about {{ driverName }}</button>
     </div>
   </div>
+  <ngb-pagination class="d-flex justify-content-end" [collectionSize]="size" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"></ngb-pagination>
+  <div style="margin-top:5px" class="card-header"><b>You're in page: {{page}}</b></div>
 </div>
 
