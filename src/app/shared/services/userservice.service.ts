@@ -12,8 +12,14 @@ export class UserserviceService {
 
   constructor(private http: HttpClient) { }
 
+  // Register User
   registerUser(registerData: RegisterData) {
     console.log(registerData);
     return this.http.post(AppSettings.Url + '/register', registerData);
+  }
+
+  // Get Name of the User
+  getName() {
+    return  'Mindfire Solutions';
   }
 }

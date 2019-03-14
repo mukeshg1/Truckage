@@ -1,6 +1,22 @@
 <div [@routerTransition]>
   <app-page-header [heading]="'Drivers'" [icon]="'fa-id-badge'"></app-page-header>
-  <p>
-    driver works!
-  </p>
+  <div class="card" style="width: 25rem;">
+    <div class="card-header">
+      Driver Details
+    </div>
+    <img class="card-img-top image-center" src={{driverImgSrc}} alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ driverName }}</h5>
+      <hr>
+      <div class="card-text">
+        <b>{{ driverName }}&nbsp;</b>{{ driverAbout }}
+      </div>
+      <hr>
+      <div class="card-text">
+        Licence Number: <b>{{ driverLicence }}</b>
+      </div>
+      <hr>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Click here to know more about {{ driverName }}</button>
+    </div>
+  </div>
 </div>

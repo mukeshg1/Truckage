@@ -39,6 +39,10 @@ const routes: Routes = [
             {
                 path: 'feedback',
                 loadChildren: './feedback/feedback.module#FeedbackModule'
+            },
+            {
+                path: 'truck',
+                loadChildren: './truck/truck.module#TruckModule'
             }
         ]
     }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+
+import { AuthenticationService } from '../../../shared/services/authentication.service';
+import { UserserviceService } from 'src/app/shared/services/userservice.service';
 
 @Component({
     selector: 'app-header',
@@ -9,8 +11,9 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 })
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
+    UserName = '';
 
-    constructor(public router: Router, private authenticationService: AuthenticationService) {
+    constructor(public router: Router, private authenticationService: AuthenticationService, private userService: UserserviceService) {
 
         this.router.events.subscribe(val => {
             if (
@@ -24,6 +27,7 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.UserName = this.userService.getName();
         this.pushRightClass = 'push-right';
     }
 
