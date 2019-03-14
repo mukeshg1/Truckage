@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PageHeaderModule } from './../../shared';
+// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { PageHeaderModule } from './../../shared';
 import { TruckRoutingModule } from './truck-routing.module';
 import { TruckComponent } from './truck.component';
 
@@ -12,7 +13,8 @@ import { TruckComponent } from './truck.component';
     CommonModule,
     TruckRoutingModule,
     ReactiveFormsModule,
-    PageHeaderModule
+    PageHeaderModule,
+    // NgbModal
   ]
 })
 export class TruckModule { }

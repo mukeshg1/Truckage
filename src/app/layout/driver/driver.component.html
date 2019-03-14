@@ -1,42 +1,44 @@
 <div [@routerTransition]>
   <app-page-header [heading]="'Drivers'" [icon]="'fa-id-badge'"></app-page-header>
-  <ngb-pagination class="d-flex justify-content-end" [collectionSize]="size" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"></ngb-pagination>
-  <div class="card" style="width: 25rem;">
-    <div class="card-header">
-      Driver Details
-    </div>
-    <img class="card-img-top image-center" src={{driverImgSrc}} alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{ driverName }}</h5>
-      <hr>
-      <div class="card-text">
-        <b>{{ driverName }}&nbsp;</b>{{ driverAbout }}
+  <div class="row card-group">
+    <div style="margin-top:5px;" class="col-sm-4" *ngFor="let driver of driverDetails">
+    <div class="card">
+      <!-- <div class="card-header">
+        Driver Details
+      </div> -->
+      <img class="card-img-top image-center" src={{driver.driverImgSrc}} alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ driver.driverName }}</h5>
+        <hr>
+        <div class="card-text">
+          <b>{{ driver.driverName }}&nbsp;</b>{{ driver.driverAbout }}
+        </div>
+        <hr>
+        <div class="card-text">
+          Licence Number: <b>{{ driver.driverLicence }}</b>
+        </div>
+        <hr>
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Driver Details</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross Click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label>Name:&nbsp;</label><b>{{ driver.driverName }}</b><br>
+            <label>About:&nbsp;</label><b>{{ driver.driverName }}&nbsp;{{ driver.driverAbout }}</b><br>
+            <label>Licence No.:&nbsp;</label><b>{{ driver.driverLicence }}</b>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
+          </div>
+        </ng-template>
+        <button type="button" class="btn btn-outline-primary btn-block" (click)="openVerticallyCentered(content)">Know more about {{ driver.driverName }}</button>
       </div>
-      <hr>
-      <div class="card-text">
-        Licence Number: <b>{{ driverLicence }}</b>
-      </div>
-      <hr>
-      <ng-template #content let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title">Driver Details</h4>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross Click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <label>Name:&nbsp;</label><b>{{ driverName }}</b><br>
-          <label>About:&nbsp;</label><b>{{ driverName }}&nbsp;{{ driverAbout }}</b><br>
-          <label>Licence No.:&nbsp;</label><b>{{ driverLicence }}</b>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
-        </div>
-      </ng-template>
-      <button type="button" class="btn btn-outline-primary mb-2 mr-2" (click)="openVerticallyCentered(content)">Click here to know more about {{ driverName }}</button>
     </div>
+  </div>
   </div>
   <ngb-pagination class="d-flex justify-content-end" [collectionSize]="size" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"></ngb-pagination>
   <div style="margin-top:5px" class="card-header"><b>You're in page: {{page}}</b></div>
 </div>
-
