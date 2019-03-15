@@ -70,7 +70,8 @@
       <!-- </form> -->
     </div>
     <div class="modal-footer">
-      <button class="btn btn-primary" (click)="regmodal.close('Close Click')">Close</button>
+      <button class="btn btn-danger" (click)="regmodal.close('Close Click')">Close</button>
+      <button [disabled]="loading" type="submit" class="btn btn-info btn-fill btn-wd">Submit</button>
     </div>
   </ng-template>
 

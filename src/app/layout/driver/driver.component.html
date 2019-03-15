@@ -15,19 +15,25 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
-      <!-- <form> -->
+    <form [formGroup]="driverForm" (ngSubmit)="onSubmit()">
+      <div class="modal-body">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label>Driver Name*</label>
-              <input type="text" class="form-control border-input">
+              <input type="text" class="form-control border-input" formControlName="driverName" [ngClass]="{ 'is-invalid': submitted && f.driverName.errors }">
+              <div *ngIf="submitted && f.driverName.errors" class="invalid-feedback">
+                <div *ngIf="f.driverName.errors.required">Driver Name is required.</div>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label>Driver License Number*</label>
-              <input type="text" class="form-control border-input">
+              <input type="text" class="form-control border-input" formControlName="driverLicenseNumber" [ngClass]="{ 'is-invalid': submitted && f.driverLicenseNumber.errors }">
+              <div *ngIf="submitted && f.driverLicenseNumber.errors" class="invalid-feedback">
+                <div *ngIf="f.driverLicenseNumber.errors.required">Driver License Number is required.</div>
+              </div>
             </div>
           </div>
         </div>
@@ -35,16 +41,22 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Driving License Type*</label>
-              <input type="text" class="form-control border-input" > 
+              <input type="text" class="form-control border-input" formControlName="driverLicenseType" [ngClass]="{ 'is-invalid': submitted && f.driverLicenseType.errors }"> 
+              <div *ngIf="submitted && f.driverLicenseType.errors" class="invalid-feedback">
+                <div *ngIf="f.driverLicenseType.errors.required">License Type of Driver is required.</div>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Driving License Issued Date*</label>
               <div class="input-group">
-                <input class="form-control border-input" ngbDatepicker #i="ngbDatepicker" (click)="i.toggle()" readonly>
+                <input class="form-control border-input" ngbDatepicker #i="ngbDatepicker" (click)="i.toggle()" readonly formControlName="licenseIssuedDate" [ngClass]="{ 'is-invalid': submitted && f.licenseIssuedDate.errors }">
                 <div class="input-group-append">
                   <button  type="button" class="form-control border-input btn btn-outline-secondary calendar" (click)="i.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                </div>
+                <div *ngIf="submitted && f.licenseIssuedDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.licenseIssuedDate.errors.required">License Issued date is required.</div>
                 </div>
               </div>
             </div>
@@ -53,9 +65,12 @@
             <div class="form-group">
               <label>Driving License Expiry Date*</label>
               <div class="input-group">
-                <input class="form-control border-input" ngbDatepicker #e="ngbDatepicker" (click)="e.toggle()" readonly>
+                <input class="form-control border-input" ngbDatepicker #e="ngbDatepicker" (click)="e.toggle()" readonly formControlName="licenseExpiryDate" [ngClass]="{ 'is-invalid': submitted && f.licenseExpiryDate.errors }">
                 <div class="input-group-append">
                   <button  type="button" class="form-control border-input btn btn-outline-secondary calendar" (click)="d.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                </div>
+                <div *ngIf="submitted && f.licenseExpiryDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.licenseExpiryDate.errors.required">License Expiry Date is required.</div>
                 </div>
               </div>
             </div>
@@ -67,22 +82,31 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Driving License Certificate*</label>
-              <input type="file" class="form-control border-input">
+              <input type="file" class="form-control border-input" formControlName="driverLicense" [ngClass]="{ 'is-invalid': submitted && f.driverLicense.errors }">
+              <div *ngIf="submitted && f.driverLicense.errors" class="invalid-feedback">
+                <div *ngIf="f.driverLicense.errors.required">Driver License document is required.</div>
+              </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label>Insurance Document*</label>
-              <input type="file" class="form-control border-input">
+              <input type="file" class="form-control border-input" formControlName="driverInsurance" [ngClass]="{ 'is-invalid': submitted && f.driverInsurance.errors }">
+              <div *ngIf="submitted && f.driverInsurance.errors" class="invalid-feedback">
+                <div *ngIf="f.driverInsurance.errors.required">Driver Insurance doument is required.</div>
+              </div>
             </div>
           </div>
         </div>
         <hr>
       <!-- </form> -->
     </div>
+  
     <div class="modal-footer">
-      <button class="btn btn-primary" (click)="regmodal.close('Close Click')">Close</button>
+      <button class="btn btn-danger" (click)="regmodal.close('Close Click')">Close</button>
+      <button type="submit" [disabled]="loading" class="btn btn-info btn-fill btn-wd">Submit</button>
     </div>
+  </form>
   </ng-template>
 
   <!-- Card for Driver Details -->

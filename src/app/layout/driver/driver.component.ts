@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation  } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-driver',
@@ -10,6 +11,8 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
   animations: [routerTransition()]
 })
 export class DriverComponent implements OnInit {
+  driverForm: FormGroup;
+  submitted = false;
   drivers = 4;
   page = 1;
   size = 10;
@@ -42,11 +45,34 @@ export class DriverComponent implements OnInit {
     }
   ];
 
-  constructor(private modalService: NgbModal, config: NgbModalConfig) {
+  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, config: NgbModalConfig) {
     config.backdrop = 'static';
   }
 
   ngOnInit() {
+    this.driverForm = this.formBuilder.group({
+      driverName: ['', Validators.required],
+      driverLicenseNumber: ['', Validators.required],
+      driverLicenseType: ['', Validators.required],
+      licenseIssuedDate: ['', Validators.required],
+      licenseExpiryDate: ['', Validators.required],
+      driverLicense: [''],
+      driverInsurance: ['']
+    });
+  }
+
+  get f() {
+    return this.driverForm.controls;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    // console.log('Data Submitted');
+    if (this.driverForm.invalid) {
+      return;
+    }
+    alert ('SUCCESS!!:-' + JSON.stringify(this.driverForm.value));
+    this.modalService.close('Submit');
   }
 
   openDriverDetailsModal(content) {
