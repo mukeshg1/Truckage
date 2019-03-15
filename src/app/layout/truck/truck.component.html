@@ -1,7 +1,53 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Truck'" [icon]="'fa-bar-chart-o'"></app-page-header>
-    <!-- <ngb-pagination class="d-flex justify-content-end" [collectionSize]="size" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"></ngb-pagination> -->
-    <p>
-      truck works!
-    </p>
+  <app-page-header [heading]="'Trucks'" [icon]="'fa-bar-chart-o'"></app-page-header>
+  <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="You've added {{trucks}} trucks on our system.">
+    Number of Trucks&nbsp;&nbsp;<span class="badge badge-light">{{ trucks }}</span>
+  </button>
+  <button type="button" class="btn btn-primary mr-2 float-right" placement="top" ngbTooltip="Click here to add a truck.">
+    Add Trucks&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
+
+  <div class="row card-group">
+    <div style="margin-top:10px;" class="col-sm-4" *ngFor="let truck of truckDetails">
+    <div class="card">
+      <div class="card-header">
+        Truck Profile Summary
+      </div>
+      <img class="card-img-top image-center" src={{truck.truckImgSrc}} alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ truck.truckName }}</h5>
+        <hr>
+        <div class="card-text">
+          {{ truck.truckAbout }}
+        </div>
+        <hr>
+        <div class="card-text">
+          Licence Number: <b>{{ truck.truckLicence }}</b>
+        </div>
+        <hr>
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Truck Details</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross Click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label>Name:&nbsp;</label><b>{{ truck.truckName }}</b><br>
+            <label>About:&nbsp;</label><b>{{ truck.truckAbout }}</b><br>
+            <label>Licence No.:&nbsp;</label><b>{{ truck.truckLicence }}</b>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
+          </div>
+        </ng-template>
+        <button type="button" class="btn btn-outline-primary btn-block" (click)="openVerticallyCentered(content)">See more about {{ truck.truckName }}</button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <ngb-pagination class="d-flex justify-content-end" [collectionSize]="size" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"></ngb-pagination>
+  <div style="margin-top:5px" class="card-header"><b>You're in page: {{page}}</b></div>
 </div>

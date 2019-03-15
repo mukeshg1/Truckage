@@ -1,11 +1,17 @@
 <div [@routerTransition]>
   <app-page-header [heading]="'Drivers'" [icon]="'fa-id-badge'"></app-page-header>
+  <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="You've added {{drivers}} drivers on our system.">
+    Number of Drivers&nbsp;&nbsp;<span class="badge badge-light">{{ drivers }}</span>
+  </button>
+  <button type="button" class="btn btn-primary mr-2 float-right" placement="top" ngbTooltip="Click here to add a driver.">
+    Add Drivers&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
+  </button>
   <div class="row card-group">
-    <div style="margin-top:5px;" class="col-sm-4" *ngFor="let driver of driverDetails">
+    <div style="margin-top:10px;" class="col-sm-4" *ngFor="let driver of driverDetails">
     <div class="card">
-      <!-- <div class="card-header">
-        Driver Details
-      </div> -->
+      <div class="card-header">
+        Driver Profile Summary
+      </div>
       <img class="card-img-top image-center" src={{driver.driverImgSrc}} alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{ driver.driverName }}</h5>
@@ -34,7 +40,7 @@
             <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
           </div>
         </ng-template>
-        <button type="button" class="btn btn-outline-primary btn-block" (click)="openVerticallyCentered(content)">Know more about {{ driver.driverName }}</button>
+        <button type="button" class="btn btn-outline-primary btn-block" (click)="openVerticallyCentered(content)">See more about {{ driver.driverName }}</button>
       </div>
     </div>
   </div>

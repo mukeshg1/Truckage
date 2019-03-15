@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation  } from '@angular/core';
 import { routerTransition } from '../../router.animations';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-driver',
@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   animations: [routerTransition()]
 })
 export class DriverComponent implements OnInit {
+  drivers = 4;
   page = 1;
   size = 10;
   closeResult: string;
@@ -41,7 +42,9 @@ export class DriverComponent implements OnInit {
     }
   ];
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, config: NgbModalConfig) {
+    config.backdrop = 'static';
+  }
 
   ngOnInit() {
   }

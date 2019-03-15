@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { routerTransition } from '../../router.animations';
 
@@ -11,39 +11,42 @@ import { routerTransition } from '../../router.animations';
   animations: [routerTransition()]
 })
 export class TruckComponent implements OnInit {
+  trucks = 4;
   page = 1;
   size = 10;
   closeResult: string;
 
-  driverDetails = [
+  truckDetails = [
     {
-      driverName: 'Niraj Prasad',
-      driverImgSrc: 'assets/images/faces/face-0.jpg',
-      driverAbout: 'is from Jamshedpur, Jharkhand and can speak Hindi, English and Odia.',
-      driverLicence: 'COMM9823E'
+      truckName: 'Heavy Weight Truck',
+      truckImgSrc: 'assets/images/trucks/truck-0.jpg',
+      truckAbout: 'It was manufactured in 2005 A.D. and has completed over 100 trips; total of 19,000 K.M.',
+      truckLicence: 'COMM9823E'
     },
     {
-      driverName: 'Mohit Mahato',
-      driverImgSrc: 'assets/images/faces/face-1.jpg',
-      driverAbout: 'is from Jamshedpur, Jharkhand and can speak Hindi, English and Odia.',
-      driverLicence: 'COMM9824E'
+      truckName: 'Light weight Truck',
+      truckImgSrc: 'assets/images/trucks/truck-1.jpg',
+      truckAbout: 'It was manufactured in 2009 A.D. and has completed over 70 trips; total of 14,000 K.M.',
+      truckLicence: 'COMM9824E'
     },
     {
-      driverName: 'Sachin Kumar',
-      driverImgSrc: 'assets/images/faces/face-2.jpg',
-      driverAbout: 'is from Bokaro, Jharkhand and can speak Hindi, English and Odia.',
-      driverLicence: 'COMM9825E'
+      truckName: 'Tripper Truck',
+      truckImgSrc: 'assets/images/trucks/truck-2.jpg',
+      truckAbout: 'It was manufactured in 2001 A.D. and has completed over 100 trips; total of 19,000 K.M.',
+      truckLicence: 'COMM9825E'
     },
     {
-      driverName: 'Ashutosh Mohapatra',
-      driverImgSrc: 'assets/images/faces/face-3.jpg',
-      driverAbout: 'is from Jajpur, Odisha and can speak Hindi, English and Odia.',
-      driverLicence: 'COMM9826E'
+      truckName: 'Medium Weight Truck',
+      truckImgSrc: 'assets/images/trucks/truck-0.jpg',
+      truckAbout: 'It was manufactured in 2015 A.D. and has completed over 100 trips; total of 19,000 K.M.',
+      truckLicence: 'COMM9826E'
     }
   ];
 
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, config: NgbModalConfig) {
+    config.backdrop = 'static';
+  }
 
   ngOnInit() {
   }
