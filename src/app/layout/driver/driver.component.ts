@@ -49,7 +49,11 @@ export class DriverComponent implements OnInit {
   ngOnInit() {
   }
 
-  openVerticallyCentered(content) {
+  openDriverDetailsModal(content) {
     this.modalService.open(content, {centered: true, backdropClass: 'light-blue-backdrop' });
+  }
+
+  openRegistrationModal(registration) {
+    this.modalService.open(registration, {centered: true, size: 'lg', backdropClass: 'light-blue-backdrop' });
   }
 }
