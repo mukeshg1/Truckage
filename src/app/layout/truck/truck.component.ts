@@ -50,8 +50,11 @@ export class TruckComponent implements OnInit {
 
   ngOnInit() {
   }
-  openVerticallyCentered(content) {
+  openTruckDetailsModal(content) {
     this.modalService.open(content, {centered: true, backdropClass: 'light-blue-backdrop' });
+  }
+  openRegistrationModal(registration) {
+    this.modalService.open(registration, {centered: true, size: 'lg', backdropClass: 'light-blue-backdrop' });
   }
 
 }

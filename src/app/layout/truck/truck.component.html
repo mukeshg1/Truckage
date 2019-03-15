@@ -1,15 +1,83 @@
 <div [@routerTransition]>
-  <app-page-header [heading]="'Trucks'" [icon]="'fa-bar-chart-o'"></app-page-header>
+  <app-page-header [heading]="'Trucks'" [icon]="'fa-truck'"></app-page-header>
   <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="You've added {{trucks}} trucks on our system.">
     Number of Trucks&nbsp;&nbsp;<span class="badge badge-light">{{ trucks }}</span>
   </button>
-  <button type="button" class="btn btn-primary mr-2 float-right" placement="top" ngbTooltip="Click here to add a truck.">
+  <button type="button" class="btn btn-primary mr-2 float-right" placement="top" ngbTooltip="Click here to add a truck." (click)="openRegistrationModal(registration)">
     Add Trucks&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
   </button>
 
+  <!-- Registration Form Modal -->
+  <ng-template #registration let-regmodal>
+    <div class="modal-header">
+      <h4 class="modal-title">Truck Registration Form</h4>
+      <button type="button" class="close" aria-label="Close" (click)="regmodal.dismiss('Cross Click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- <form> -->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Select Truck Type*</label>
+              <input type="text" class="form-control border-input"> 
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Truck Manufactured Date*</label>
+              <div class="input-group">
+                <input class="form-control border-input" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" readonly>
+                <!-- <ngb-datepicker #d>
+                  </ngb-datepicker> -->
+                <div class="input-group-append">
+                  <button  type="button" class="form-control border-input btn btn-outline-secondary calendar" (click)="d.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>License Plate Number*</label>
+              <input type="text" class="form-control border-input" > 
+            </div>
+          </div>
+        </div>
+        <hr>
+        <label><i>Truck Documents*</i></label>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Registration Certificate*</label>
+              <input type="file" class="form-control border-input">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Insurance Document*</label>
+              <input type="file" class="form-control border-input">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Pollution Document*</label>
+              <input type="file" class="form-control border-input">
+            </div>
+          </div>
+        </div>
+        <hr>
+      <!-- </form> -->
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="regmodal.close('Close Click')">Close</button>
+    </div>
+  </ng-template>
+
+  <!-- Truck Profile Cards -->
   <div class="row card-group">
     <div style="margin-top:10px;" class="col-sm-4" *ngFor="let truck of truckDetails">
-    <div class="card">
+    <div class="shadow card">
       <div class="card-header">
         Truck Profile Summary
       </div>
@@ -25,6 +93,7 @@
           Licence Number: <b>{{ truck.truckLicence }}</b>
         </div>
         <hr>
+        <!-- Modal for Truck details -->
         <ng-template #content let-modal>
           <div class="modal-header">
             <h4 class="modal-title">Truck Details</h4>
@@ -41,7 +110,7 @@
             <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
           </div>
         </ng-template>
-        <button type="button" class="btn btn-outline-primary btn-block" (click)="openVerticallyCentered(content)">See more about {{ truck.truckName }}</button>
+        <button type="button" class="btn btn-outline-primary btn-block" (click)="openTruckDetailsModal(content)">See more about {{ truck.truckName }}</button>
       </div>
     </div>
   </div>
@@ -51,3 +120,4 @@
   <ngb-pagination class="d-flex justify-content-end" [collectionSize]="size" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"></ngb-pagination>
   <div style="margin-top:5px" class="card-header"><b>You're in page: {{page}}</b></div>
 </div>
+
