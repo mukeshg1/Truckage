@@ -43,6 +43,10 @@ const routes: Routes = [
             {
                 path: 'truck',
                 loadChildren: './truck/truck.module#TruckModule'
+            },
+            {
+                path: 'changepassword',
+                loadChildren: './changepassword/changepassword.module#ChangepasswordModule'
             }
         ]
     }

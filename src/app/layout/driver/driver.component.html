@@ -115,6 +115,7 @@
     <div class="card">
       <div class="card-header">
         Driver Profile Summary
+        <i class="fa fa-info-circle fa-2x float-right" aria-hidden="true" placement="left" ngbTooltip="Click here to See more about {{driver.driverName}}" (click)="openDriverDetailsModal(content)"></i>
       </div>
       <img class="card-img-top image-center" src={{driver.driverImgSrc}} alt="Card image cap">
       <div class="card-body">
@@ -127,7 +128,6 @@
         <div class="card-text">
           Licence Number: <b>{{ driver.driverLicence }}</b>
         </div>
-        <hr>
 
         <!-- Modal for Driver Details -->
         <ng-template #content let-modal>
@@ -146,7 +146,7 @@
             <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
           </div>
         </ng-template>
-        <button type="button" class="btn btn-outline-primary btn-block" (click)="openDriverDetailsModal(content)">See more about {{ driver.driverName }}</button>
+        <!-- <button type="button" class="btn btn-outline-primary btn-block" (click)="openDriverDetailsModal(content)">See more about {{ driver.driverName }}</button> -->
       </div>
     </div>
   </div>

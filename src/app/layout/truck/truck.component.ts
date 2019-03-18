@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { routerTransition } from '../../router.animations';
 
@@ -11,6 +12,8 @@ import { routerTransition } from '../../router.animations';
   animations: [routerTransition()]
 })
 export class TruckComponent implements OnInit {
+  truckForm: FormGroup;
+  submitted = false;
   trucks = 4;
   page = 1;
   size = 10;
@@ -44,12 +47,35 @@ export class TruckComponent implements OnInit {
   ];
 
 
-  constructor(private modalService: NgbModal, config: NgbModalConfig) {
+  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, config: NgbModalConfig) {
     config.backdrop = 'static';
   }
 
   ngOnInit() {
+    this.truckForm = this.formBuilder.group({
+      truckType: ['', Validators.required],
+      truckManufacturedDate: ['', Validators.required],
+      licensePlateNumber: ['', Validators.required],
+      registrationCertificate: ['', Validators.required],
+      insuranceDocument: ['', Validators.required],
+      pollutionDocument: ['', Validators.required]
+    });
   }
+
+  get f() {
+    return this.truckForm.controls;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    // console.log('Data Submitted');
+    if (this.truckForm.invalid) {
+      return;
+    }
+    alert ('SUCCESS!!:-' + JSON.stringify(this.truckForm.value));
+    console.log('Added');
+  }
+
   openTruckDetailsModal(content) {
     this.modalService.open(content, {centered: true, backdropClass: 'light-blue-backdrop' });
   }

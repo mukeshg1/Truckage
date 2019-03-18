@@ -72,7 +72,7 @@ export class DriverComponent implements OnInit {
       return;
     }
     alert ('SUCCESS!!:-' + JSON.stringify(this.driverForm.value));
-    this.modalService.close('Submit');
+    // this.modalService.close('Submit');
   }
 
   openDriverDetailsModal(content) {

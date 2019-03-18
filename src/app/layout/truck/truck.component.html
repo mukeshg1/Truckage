@@ -9,38 +9,45 @@
 
   <!-- Registration Form Modal -->
   <ng-template #registration let-regmodal>
-    <div class="modal-header">
-      <h4 class="modal-title">Truck Registration Form</h4>
-      <button type="button" class="close" aria-label="Close" (click)="regmodal.dismiss('Cross Click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <!-- <form> -->
+    <form [formGroup]="truckForm" (ngSubmit)="onSubmit()">
+      <div class="modal-header">
+        <h4 class="modal-title">Truck Registration Form</h4>
+        <button type="button" class="close" aria-label="Close" (click)="regmodal.dismiss('Cross Click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
         <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <label>Select Truck Type*</label>
-              <input type="text" class="form-control border-input"> 
+              <input type="text" class="form-control border-input" formControlName="truckType" [ngClass]="{ 'is-invalid': submitted && f.truckType.errors }"> 
+              <div *ngIf="submitted && f.truckType.errors" class="invalid-feedback">
+                <div *ngIf="f.truckType.errors.required">Truck Type is required.</div>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Truck Manufactured Date*</label>
               <div class="input-group">
-                <input class="form-control border-input" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" readonly>
-                <!-- <ngb-datepicker #d>
-                  </ngb-datepicker> -->
+                <input class="form-control border-input" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" readonly formControlName="truckManufacturedDate" [ngClass]="{ 'is-invalid': submitted && f.truckManufacturedDate.errors }">
                 <div class="input-group-append">
                   <button  type="button" class="form-control border-input btn btn-outline-secondary calendar" (click)="d.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
                 </div>
+                <div *ngIf="submitted && f.truckManufacturedDate.errors" class="invalid-feedback">
+                <div *ngIf="f.truckManufacturedDate.errors.required">Truck Manufactured Date is required.</div>
+              </div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>License Plate Number*</label>
-              <input type="text" class="form-control border-input" > 
+              <input type="text" class="form-control border-input" formControlName="licensePlateNumber" [ngClass]="{ 'is-invalid': submitted && f.licensePlateNumber.errors }"> 
+              <div *ngIf="submitted && f.licensePlateNumber.errors" class="invalid-feedback">
+                <div *ngIf="f.licensePlateNumber.errors.required">license Plate Number is required.</div>
+              </div>
             </div>
           </div>
         </div>
@@ -50,29 +57,38 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Registration Certificate*</label>
-              <input type="file" class="form-control border-input">
+              <input type="file" class="form-control border-input" formControlName="registrationCertificate" [ngClass]="{ 'is-invalid': submitted && f.registrationCertificate.errors }">
+              <!-- <div *ngIf="submitted && f.registrationCertificate.errors" class="invalid-feedback">
+                <div *ngIf="f.registrationCertificate.errors.required">Truck Registration Certificate is required.</div>
+              </div> -->
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Insurance Document*</label>
-              <input type="file" class="form-control border-input">
+              <input type="file" class="form-control border-input" formControlName="insuranceDocument" [ngClass]="{ 'is-invalid': submitted && f.insuranceDocument.errors }">
+              <!-- <div *ngIf="submitted && f.insuranceDocument.errors" class="invalid-feedback">
+                <div *ngIf="f.insuranceDocument.errors.required">Insurance Document is required.</div>
+              </div> -->
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Pollution Document*</label>
-              <input type="file" class="form-control border-input">
+              <input type="file" class="form-control border-input" formControlName="pollutionDocument" [ngClass]="{ 'is-invalid': submitted && f.pollutionDocument.errors }">
+              <!-- <div *ngIf="submitted && f.pollutionDocument.errors" class="invalid-feedback">
+                <div *ngIf="f.pollutionDocument.errors.required">pollution Document is required.</div>
+              </div> -->
             </div>
           </div>
         </div>
         <hr>
-      <!-- </form> -->
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-danger" (click)="regmodal.close('Close Click')">Close</button>
-      <button [disabled]="loading" type="submit" class="btn btn-info btn-fill btn-wd">Submit</button>
-    </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" (click)="regmodal.close('Close Click')">Close</button>
+        <button [disabled]="loading" type="submit" class="btn btn-info btn-fill btn-wd">Submit</button>
+      </div>
+    </form>
   </ng-template>
 
   <!-- Truck Profile Cards -->
@@ -81,6 +97,7 @@
     <div class="shadow card">
       <div class="card-header">
         Truck Profile Summary
+        <i class="fa fa-info-circle fa-2x float-right" aria-hidden="true" placement="left" ngbTooltip="Click here to see more about {{ truck.truckName }}" (click)="openTruckDetailsModal(content)"></i>
       </div>
       <img class="card-img-top image-center" src={{truck.truckImgSrc}} alt="Card image cap">
       <div class="card-body">
@@ -93,7 +110,7 @@
         <div class="card-text">
           Licence Number: <b>{{ truck.truckLicence }}</b>
         </div>
-        <hr>
+
         <!-- Modal for Truck details -->
         <ng-template #content let-modal>
           <div class="modal-header">
@@ -111,7 +128,7 @@
             <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
           </div>
         </ng-template>
-        <button type="button" class="btn btn-outline-primary btn-block" (click)="openTruckDetailsModal(content)">See more about {{ truck.truckName }}</button>
+        <!-- <button type="button" class="btn btn-outline-primary btn-block" (click)="openTruckDetailsModal(content)">See more about {{ truck.truckName }}</button> -->
       </div>
     </div>
   </div>
