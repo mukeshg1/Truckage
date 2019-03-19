@@ -7,6 +7,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MustMatch } from '../shared/helpers/must-match.validator';
 import { MustSelect } from '../shared/helpers/select-type.validator';
 
+import { AppSettings } from '../shared/helpers/settings';
+
 import { routerTransition } from '../router.animations';
 import { UserserviceService } from '../shared/services/userservice.service';
 import { RegisterData } from '../shared/models/registerData';
@@ -44,9 +46,9 @@ export class SignupComponent implements OnInit {
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(8),
-                Validators.pattern(/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,}$/)]],
+                Validators.pattern(AppSettings.pattern)]],
             confirmPassword: ['', [Validators.required, Validators.minLength(8),
-                Validators.pattern(/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,}$/)]],
+                Validators.pattern(AppSettings.pattern)]],
             userType: ['']
         }, {
             validator: [MustMatch('password', 'confirmPassword'), MustSelect('userType')]
