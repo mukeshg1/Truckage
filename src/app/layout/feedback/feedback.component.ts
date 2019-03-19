@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+
 import { routerTransition } from '../../router.animations';
 
 @Component({
@@ -8,8 +10,13 @@ import { routerTransition } from '../../router.animations';
   animations: [routerTransition()]
 })
 export class FeedbackComponent implements OnInit {
+  currentRate = 3.75;
+  review: string[] = ['Good service', 'Bad experience', 'Not so great not so bad.'];
 
-  constructor() { }
+  constructor(config: NgbRatingConfig) {
+    config.max = 5;
+    config.readonly = true;
+   }
 
   ngOnInit() {
   }

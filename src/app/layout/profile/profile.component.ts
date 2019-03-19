@@ -13,6 +13,7 @@ import { UserserviceService } from '../../shared/services/userservice.service';
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   submitted = false;
+  verified = true;
   UserName = '';
   UserEmail = 'mindfire@email.com';
 

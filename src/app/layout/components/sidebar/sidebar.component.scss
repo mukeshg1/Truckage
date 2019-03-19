@@ -1,5 +1,6 @@
 $topnav-background-color: #222;
 .sidebar {
+    font-size: 17px;
     border-radius: 0;
     position: fixed;
     z-index: 1000;
@@ -56,7 +57,7 @@ $topnav-background-color: #222;
             border: none;
         }
         .panel-title {
-            font-size: 1rem;
+            font-size: 2rem;
             height: 50px;
             margin-bottom: 0;
             a {

@@ -6,6 +6,7 @@
             <form role="form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                 <div class="form-content text-left">
                     <p><i>Please Fill out the form to create an account.</i></p>
+                    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -37,9 +38,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <select class="form-control input-underline" formControlName="userType">
+                                <select class="form-control input-underline" formControlName="userType" [ngClass]="{ 'is-invalid': submitted && f.userType.errors }">
                                     <option class="option" *ngFor="let option of userType">{{ option }}</option> 
                                 </select>
+                                <div *ngIf="submitted && f.userType.errors" class="invalid-feedback">
+                                    <div *ngIf="f.userType.errors.mustSelect">You must Select User Type.</div>
+                                </div>
                             </div>
                         </div>                    
                     </div>
@@ -49,7 +53,8 @@
                                 <input type="password" class="form-control input-underline" formControlName="password" placeholder="{{ 'Password*' }}" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                     <div *ngIf="f.password.errors.required">Password is required.</div>
-                                    <div *ngIf="f.password.errors.minlength">Password must be of at least 5 characters.</div>
+                                    <div *ngIf="f.password.errors.minlength">Password must be of at least 8 characters.</div>
+                                    <div *ngIf="f.password.errors.pattern">Password must contain any of the [! @ # $ %] special character and a number.</div>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +63,9 @@
                                 <input type="password" class="form-control input-underline" formControlName="confirmPassword" placeholder="{{ 'Confirm Password*' }}" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
                                 <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
                                     <div *ngIf="f.confirmPassword.errors.required">Password is required.</div>
-                                    <div *ngIf="f.confirmPassword.errors.mustMatch">Your both password doesnot match.</div>
+                                    <div *ngIf="f.confirmPassword.errors.minlength">Password must be of at least 8 characters.</div>
+                                    <div *ngIf="f.confirmPassword.errors.mustMatch">Your confirm password doesnot match with the entered password.</div>
+                                    <div *ngIf="f.confirmPassword.errors.pattern">Password must contain any of the [! @ # $ %] special character and a number.</div>
                                 </div>
                             </div>
                         </div>

@@ -3,6 +3,8 @@ import { routerTransition } from '../../router.animations';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { MustSelectDriver } from '../../shared/helpers/select-type.validator';
+
 @Component({
   selector: 'app-driver',
   templateUrl: './driver.component.html',
@@ -18,6 +20,7 @@ export class DriverComponent implements OnInit {
   size = 10;
   closeResult: string;
 
+  driverType = ['--Select Driving License Type--', 'Commercial driving License', 'Non-Commercial driving License'];
   driverDetails = [
     {
       driverName: 'Niraj Prasad',
@@ -53,11 +56,14 @@ export class DriverComponent implements OnInit {
     this.driverForm = this.formBuilder.group({
       driverName: ['', Validators.required],
       driverLicenseNumber: ['', Validators.required],
-      driverLicenseType: ['', Validators.required],
+      driverLicenseType: [''],
       licenseIssuedDate: ['', Validators.required],
       licenseExpiryDate: ['', Validators.required],
-      driverLicense: [''],
-      driverInsurance: ['']
+      driverLicense: [null, Validators.required],
+      driverInsurance: [null, Validators.required]
+    },
+    {
+      validators: MustSelectDriver('driverLicenseType')
     });
   }
 
@@ -76,7 +82,7 @@ export class DriverComponent implements OnInit {
   }
 
   openDriverDetailsModal(content) {
-    this.modalService.open(content, {centered: true, backdropClass: 'light-blue-backdrop' });
+    this.modalService.open(content, {centered: true, size: 'lg', backdropClass: 'light-blue-backdrop' });
   }
 
   openRegistrationModal(registration) {

@@ -41,9 +41,12 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Driving License Type*</label>
-              <input type="text" class="form-control border-input" formControlName="driverLicenseType" [ngClass]="{ 'is-invalid': submitted && f.driverLicenseType.errors }"> 
+              <select class="form-control" formControlName="driverLicenseType" [ngClass]="{ 'is-invalid': submitted && f.driverLicenseType.errors }">
+                <option *ngFor="let driver of driverType">{{driver}}</option>  
+              </select> 
               <div *ngIf="submitted && f.driverLicenseType.errors" class="invalid-feedback">
-                <div *ngIf="f.driverLicenseType.errors.required">License Type of Driver is required.</div>
+                <div *ngIf="f.driverLicenseType.errors.mustSelectType">Driver License Type must be selected.</div>
+                <div *ngIf="f.driverLicenseType.errors.invalidSelect">Non-Commercial drivers cannot be added.</div>
               </div>
             </div>
           </div>

@@ -21,9 +21,11 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Select Truck Type*</label>
-              <input type="text" class="form-control border-input" formControlName="truckType" [ngClass]="{ 'is-invalid': submitted && f.truckType.errors }"> 
+              <select class="form-control" formControlName="truckType" [ngClass]="{ 'is-invalid': submitted && f.truckType.errors }">
+                <option *ngFor="let type of truckType" >{{type}}</option>
+              </select> 
               <div *ngIf="submitted && f.truckType.errors" class="invalid-feedback">
-                <div *ngIf="f.truckType.errors.required">Truck Type is required.</div>
+                <div *ngIf="f.truckType.errors.mustSelect">Truck Type is required.</div>
               </div>
             </div>
           </div>
@@ -58,27 +60,27 @@
             <div class="form-group">
               <label>Registration Certificate*</label>
               <input type="file" class="form-control border-input" formControlName="registrationCertificate" [ngClass]="{ 'is-invalid': submitted && f.registrationCertificate.errors }">
-              <!-- <div *ngIf="submitted && f.registrationCertificate.errors" class="invalid-feedback">
+              <div *ngIf="submitted && f.registrationCertificate.errors" class="invalid-feedback">
                 <div *ngIf="f.registrationCertificate.errors.required">Truck Registration Certificate is required.</div>
-              </div> -->
+              </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Insurance Document*</label>
               <input type="file" class="form-control border-input" formControlName="insuranceDocument" [ngClass]="{ 'is-invalid': submitted && f.insuranceDocument.errors }">
-              <!-- <div *ngIf="submitted && f.insuranceDocument.errors" class="invalid-feedback">
+              <div *ngIf="submitted && f.insuranceDocument.errors" class="invalid-feedback">
                 <div *ngIf="f.insuranceDocument.errors.required">Insurance Document is required.</div>
-              </div> -->
+              </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Pollution Document*</label>
               <input type="file" class="form-control border-input" formControlName="pollutionDocument" [ngClass]="{ 'is-invalid': submitted && f.pollutionDocument.errors }">
-              <!-- <div *ngIf="submitted && f.pollutionDocument.errors" class="invalid-feedback">
+              <div *ngIf="submitted && f.pollutionDocument.errors" class="invalid-feedback">
                 <div *ngIf="f.pollutionDocument.errors.required">pollution Document is required.</div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
