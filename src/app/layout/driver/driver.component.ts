@@ -78,6 +78,7 @@ export class DriverComponent implements OnInit {
       return;
     }
     alert ('SUCCESS!!:-' + JSON.stringify(this.driverForm.value));
+    location.reload();
     // this.modalService.close('Submit');
   }
 

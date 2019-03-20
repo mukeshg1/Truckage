@@ -21,10 +21,11 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Select Truck Type*</label>
-              <select class="form-control" formControlName="truckType" [ngClass]="{ 'is-invalid': submitted && f.truckType.errors }">
-                <option *ngFor="let type of truckType" >{{type}}</option>
+              <select class="form-control" formControlName="truckType" [ngClass]="{ 'is-invalid': submitted && f.truckType.errors}">
+                <option *ngFor="let type of truckTypeList" >{{type}}</option>
               </select> 
               <div *ngIf="submitted && f.truckType.errors" class="invalid-feedback">
+                  <div *ngIf="f.truckType.errors.required">Truck Type is required.</div>
                 <div *ngIf="f.truckType.errors.mustSelect">Truck Type is required.</div>
               </div>
             </div>
@@ -38,8 +39,8 @@
                   <button  type="button" class="form-control border-input btn btn-outline-secondary calendar" (click)="d.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
                 </div>
                 <div *ngIf="submitted && f.truckManufacturedDate.errors" class="invalid-feedback">
-                <div *ngIf="f.truckManufacturedDate.errors.required">Truck Manufactured Date is required.</div>
-              </div>
+                  <div *ngIf="f.truckManufacturedDate.errors.required">Truck Manufactured Date is required.</div>
+                </div>
               </div>
             </div>
           </div>
@@ -87,7 +88,7 @@
         <hr>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-danger" (click)="regmodal.close('Close Click')">Close</button>
+        <button class="btn btn-danger" (click)="regmodal.close('Close Click'); resetForm();">Close</button>
         <button [disabled]="loading" type="submit" class="btn btn-info btn-fill btn-wd">Submit</button>
       </div>
     </form>

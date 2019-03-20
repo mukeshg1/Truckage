@@ -20,7 +20,7 @@ export class TruckComponent implements OnInit {
   size = 10;
   closeResult: string;
 
-  truckType = ['--Select Truck Type--', 'Light Weight Truck', 'Medium Weight Truck', 'Heavy Weight Truck'];
+  truckTypeList = ['--Select Truck Type--', 'Light Weight Truck', 'Medium Weight Truck', 'Heavy Weight Truck'];
   truckDetails = [
     {
       truckName: 'Heavy Weight Truck',
@@ -55,7 +55,7 @@ export class TruckComponent implements OnInit {
 
   ngOnInit() {
     this.truckForm = this.formBuilder.group({
-      truckType: [''],
+      truckType: ['', Validators.required],
       truckManufacturedDate: ['', Validators.required],
       licensePlateNumber: ['', Validators.required],
       registrationCertificate: [null, Validators.required],
@@ -79,6 +79,12 @@ export class TruckComponent implements OnInit {
     }
     alert ('SUCCESS!!:-' + JSON.stringify(this.truckForm.value));
     console.log('Added');
+    location.reload();
+  }
+
+  resetForm() {
+    this.truckForm.reset();
+    this.truckForm.markAsPristine();
   }
 
   openTruckDetailsModal(content) {

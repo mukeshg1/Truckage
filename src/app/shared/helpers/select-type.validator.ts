@@ -58,3 +58,41 @@ export function MustSelectDriver(controlName: string) {
         }
     };
 }
+
+// Custom validator to check if appropriate Driver Type is selected during registration
+export function MustSelectGender(controlName: string) {
+    return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+
+        if (control.errors && !control.errors.mustSelectType) {
+            // return if another validator has already found an error on the matchingControl
+            return;
+        }
+
+        // set error on control if validation fails
+        if (control.value === '' || control.value === '--Select Gender--') {
+            control.setErrors({ mustSelectType: true });
+        } else {
+            control.setErrors(null);
+        }
+    };
+}
+
+// Custom validator to check if appropriate Driver Type is selected during registration
+export function MustSelectId(controlName: string) {
+    return (formGroup: FormGroup) => {
+        const control = formGroup.controls[controlName];
+
+        if (control.errors && !control.errors.mustSelectType) {
+            // return if another validator has already found an error on the matchingControl
+            return;
+        }
+
+        // set error on control if validation fails
+        if (control.value === '' || control.value === '--Select Id Type--') {
+            control.setErrors({ mustSelectType: true });
+        } else {
+            control.setErrors(null);
+        }
+    };
+}

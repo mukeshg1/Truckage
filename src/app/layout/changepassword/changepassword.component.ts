@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import custom validator to validate that password and confirm password fields match
 import { MustMatch } from '../../shared/helpers/must-match.validator';
 
+// import custom password pattern
 import { AppSettings } from '../../shared/helpers/settings';
 
 @Component({
@@ -21,9 +22,9 @@ export class ChangepasswordComponent implements OnInit {
     this.changePasswordForm = this.formBuilder.group({
       oldPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(8),
-        Validators.pattern(AppSettings.pattern)]],
+                         Validators.pattern(AppSettings.pattern)]],
       confirmNewPassword:  ['', [Validators.required, Validators.minLength(8),
-        Validators.pattern(AppSettings.pattern)]]
+                                 Validators.pattern(AppSettings.pattern)]]
   },
   {
     validator: MustMatch('newPassword', 'confirmNewPassword')

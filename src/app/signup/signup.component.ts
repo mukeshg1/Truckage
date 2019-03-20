@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MustMatch } from '../shared/helpers/must-match.validator';
 import { MustSelect } from '../shared/helpers/select-type.validator';
 
+// import custom password pattern
 import { AppSettings } from '../shared/helpers/settings';
 
 import { routerTransition } from '../router.animations';
@@ -98,6 +99,7 @@ export class SignupComponent implements OnInit {
             .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
+                    console.log(data);
                 },
                 error => {
                     this.error = error;

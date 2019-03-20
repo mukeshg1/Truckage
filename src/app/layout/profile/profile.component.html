@@ -72,14 +72,14 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Company</label>
+                      <label>Company*</label>
                       <input type="text" class="form-control border-input" formControlName="companyName" placeholder="Company" [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }">
                       <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
                           <div *ngIf="f.companyName.errors.required">Company Name is required.</div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Email address</label>
                       <input type="email" class="form-control border-input" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
@@ -88,7 +88,7 @@
                           <div *ngIf="f.email.errors.email">Enter a valid email.</div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="row">
                   <div class="col-md-4">
@@ -98,16 +98,22 @@
                         <option *ngFor="let gender of Gender">{{ gender }}</option>
                       </select>
                       <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-                          <div *ngIf="f.gender.errors.required">Please select gender.</div>
+                        <div *ngIf="f.gender.errors.required">Please select gender.</div>
+                        <div *ngIf="f.gender.errors.mustSelectType">Gender must be selected.</div>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Date of Birth*</label>
-                      <input type="date" class="form-control border-input" formControlName="dob" placeholder="Date of Birth" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
-                      <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                      <div class="input-group">
+                        <input readonly class="form-control border-input" ngbDatepicker #i="ngbDatepicker" (click)="i.toggle()" formControlName="dob" placeholder="Date of Birth" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
+                        <div class="input-group-append">
+                          <button type="button" class="form-control border-input btn btn-outline-secondary calendar" (click)="i.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                        </div>
+                        <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
                           <div *ngIf="f.dob.errors.required">Date of Birth is required.</div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -129,7 +135,8 @@
                         <option *ngFor="let idtype of idType">{{ idtype }}</option>
                       </select>
                       <div *ngIf="submitted && f.idType.errors" class="invalid-feedback">
-                          <div *ngIf="f.idType.errors.required">Please select Id Type</div>
+                        <div *ngIf="f.idType.errors.required">Please select Id Type</div>
+                        <div *ngIf="f.idType.errors.mustSelectType">Id Type must be selected.</div>
                       </div>
                     </div>
                   </div>
@@ -173,19 +180,19 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>City*</label>
-                        <input type="text" class="form-control border-input" formControlName="city" placeholder="City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
-                        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                            <div *ngIf="f.city.errors.required">City is required.</div>
+                        <label>Country*</label>
+                        <input type="text" class="form-control border-input" formControlName="country" placeholder="Country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                        <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                            <div *ngIf="f.country.errors.required">Country is required.</div>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label>Country*</label>
-                        <input type="text" class="form-control border-input" formControlName="country" placeholder="Country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
-                        <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                            <div *ngIf="f.country.errors.required">Country is required.</div>
+                        <label>City*</label>
+                        <input type="text" class="form-control border-input" formControlName="city" placeholder="City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                            <div *ngIf="f.city.errors.required">City is required.</div>
                         </div>
                       </div>
                     </div>

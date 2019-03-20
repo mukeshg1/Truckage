@@ -10,6 +10,7 @@ import { routerTransition } from '../../router.animations';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
+    public token = '';
 
     constructor() {
         this.sliders.push(
@@ -52,7 +53,10 @@ export class DashboardComponent implements OnInit {
         );
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.token = localStorage.getItem('currentUser');
+        console.log(JSON.parse(this.token));
+    }
 
     public closeAlert(alert: any) {
         const index: number = this.alerts.indexOf(alert);

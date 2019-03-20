@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { routerTransition } from '../../router.animations';
 import { UserserviceService } from '../../shared/services/userservice.service';
 
+import { MustSelectGender, MustSelectId } from '../../shared/helpers/select-type.validator';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,9 +19,9 @@ export class ProfileComponent implements OnInit {
   UserName = '';
   UserEmail = 'mindfire@email.com';
 
-  Gender: string[] = ['Male', 'Female', 'Others'];
+  Gender: string[] = ['--Select Gender--', 'Male', 'Female', 'Others'];
 
-  idType: string[] = ['Aadhar Card', 'Voter Card', 'PAN Card', 'Passport'];
+  idType: string[] = ['--Select Id Type--', 'Aadhar Card', 'Voter Card', 'PAN Card', 'Passport'];
 
   constructor(private formBuilder: FormBuilder, private userService: UserserviceService) { }
 
@@ -42,6 +44,9 @@ export class ProfileComponent implements OnInit {
       city: ['', Validators.required],
       country: ['', Validators.required],
       postalCode: ['', Validators.required]
+    },
+    {
+      validators: [MustSelectGender('gender'), MustSelectId('idType')]
     });
   }
   get f() {
