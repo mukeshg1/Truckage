@@ -47,11 +47,12 @@ export class ChangepasswordComponent implements OnInit {
     if (this.changePasswordForm.invalid) {
       return;
     }
-    this.userService.changePassword().subscribe( data => {
+    this.userService.changePassword(this.changePasswordForm.value).subscribe( data => {
       console.log(data);
     },
     error => {
         this.error = error;
+        console.log("Error");
         console.log(this.error);
     });
   }

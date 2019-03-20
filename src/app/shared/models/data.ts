@@ -6,3 +6,9 @@ export class RegisterData {
     confirmpassword?: string;
     token?: string;
 }
+
+export class changePasswordData {
+    oldPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
+}
