@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { UserserviceService } from '../../shared/services/userservice.service';
+import { AuthenticationService } from '../../shared/services/authentication.service';
+
 // import custom validator to validate that password and confirm password fields match
 import { MustMatch } from '../../shared/helpers/must-match.validator';
 
@@ -15,8 +18,11 @@ import { AppSettings } from '../../shared/helpers/settings';
 export class ChangepasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
   submitted = false;
+  error = '';
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+    private userService: UserserviceService,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.changePasswordForm = this.formBuilder.group({
@@ -41,7 +47,13 @@ export class ChangepasswordComponent implements OnInit {
     if (this.changePasswordForm.invalid) {
       return;
     }
-    console.log('Working');
+    this.userService.changePassword().subscribe( data => {
+      console.log(data);
+    },
+    error => {
+        this.error = error;
+        console.log(this.error);
+    });
   }
 
 }

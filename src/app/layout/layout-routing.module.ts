@@ -12,6 +12,11 @@ const routes: Routes = [
                 redirectTo: 'dashboard',
                 pathMatch: 'full'
             },
+            // {
+            //     path: '**',
+            //     redirectTo: 'not-found',
+            //     pathMatch: 'full'
+            // },
             {
                 path: 'dashboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
@@ -47,7 +52,11 @@ const routes: Routes = [
             {
                 path: 'changepassword',
                 loadChildren: './changepassword/changepassword.module#ChangepasswordModule'
-            }
+            },
+            // {
+            //     path: 'not-found',
+            //     loadChildren: '../not-found/not-found.module#NotFoundModule'
+            // }
         ]
     }
 ];
