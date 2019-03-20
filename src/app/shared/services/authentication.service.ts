@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AppSettings } from '../helpers/settings';
-import { RegisterData } from '../models/registerData';
+import { RegisterData } from '../models/data';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -35,7 +35,6 @@ export class AuthenticationService {
     }
 
     logout() {
-        console.log('Clicked on log out service.');
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);

@@ -12,7 +12,7 @@ import { AppSettings } from '../shared/helpers/settings';
 
 import { routerTransition } from '../router.animations';
 import { UserserviceService } from '../shared/services/userservice.service';
-import { RegisterData } from '../shared/models/registerData';
+import { RegisterData } from '../shared/models/data';
 import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({

@@ -49,10 +49,11 @@ export class ChangepasswordComponent implements OnInit {
     }
     this.userService.changePassword(this.changePasswordForm.value).subscribe( data => {
       console.log(data);
+      this.authenticationService.logout();
     },
     error => {
         this.error = error;
-        console.log("Error");
+        console.log('Error');
         console.log(this.error);
     });
   }

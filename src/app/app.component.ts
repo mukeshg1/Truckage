@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from './shared/services/authentication.service';
-import { RegisterData } from './shared/models/registerData';
+import { RegisterData } from './shared/models/data';
 
 @Component({
     selector: 'app-root',

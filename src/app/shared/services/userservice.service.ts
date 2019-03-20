@@ -9,7 +9,6 @@ import { RegisterData, changePasswordData } from '../models/data';
   providedIn: 'root'
 })
 export class UserserviceService {
-  token = null;
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +28,3 @@ export class UserserviceService {
     return this.http.post('http://172.16.9.102/industrial-transportation-slim/public/private/v1/change-password', changeData);
   }
 }
-
-// {
-//   headers: new HttpHeaders().set('Authorization',  `Bearer ${this.token}`)
-// }

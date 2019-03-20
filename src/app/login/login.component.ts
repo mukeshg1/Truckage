@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { routerTransition } from '../router.animations';
 import { AuthenticationService } from '../shared/services/authentication.service';
-import { RegisterData } from '../shared/models/registerData';
+import { RegisterData } from '../shared/models/data';
 
 @Component({
     selector: 'app-login',
