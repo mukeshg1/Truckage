@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable, Subject} from 'rxjs';
 
-import { AppSettings } from '../helpers/settings';
+import { AppSettings } from '../../../environments/environment';
 import { RegisterData, changePasswordData } from '../models/data';
 
 @Injectable({
@@ -14,7 +14,6 @@ export class UserserviceService {
 
   // Register User
   registerUser(registerData: RegisterData) {
-    console.log(registerData);
     return this.http.post(AppSettings.Url + '/register', registerData);
   }
 
@@ -24,7 +23,6 @@ export class UserserviceService {
   }
 
   changePassword(changeData: changePasswordData) {
-    console.log(changeData);
     return this.http.post('http://172.16.9.102/industrial-transportation-slim/public/private/v1/change-password', changeData);
   }
 }

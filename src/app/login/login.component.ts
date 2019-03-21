@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute ) {  }
 
     ngOnInit() {
+        if (localStorage.getItem('currentUser')) {
+            this.router.navigate(['/dashboard']);
+        }
         this.loginForm = this.formBuilder.group({
             loginEmail: ['', [Validators.required, Validators.email]],
             loginPassword: ['', Validators.required]
@@ -44,25 +47,20 @@ export class LoginComponent implements OnInit {
         return this.loginForm.controls;
     }
     onSubmit() {
-        // this.submitted = true;
-
         if (this.loginForm.invalid) {
             return;
         }
 
-        console.log(this.fetchValue.loginEmail.value);
-        console.log(this.fetchValue.loginEmail.value);
         this.authenticationService.login(this.fetchValue.loginEmail.value, this.fetchValue.loginPassword.value)
             .pipe(first())
             .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
-                    console.log(data);
                 },
                 error => {
                     this.error = error;
                     this.loading = false;
         });
-        this.loginForm.reset();
+
     }
 }

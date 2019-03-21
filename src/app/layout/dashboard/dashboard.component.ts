@@ -54,8 +54,6 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.token = localStorage.getItem('currentUser');
-        console.log(JSON.parse(this.token));
     }
 
     public closeAlert(alert: any) {

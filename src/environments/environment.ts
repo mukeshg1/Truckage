@@ -6,6 +6,12 @@ export const environment = {
   production: false
 };
 
+export class AppSettings {
+  public static Url = 'http://172.16.9.102/industrial-transportation-slim/public/public/v1';
+  public static pattern = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,}$/;
+}
+
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

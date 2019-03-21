@@ -8,7 +8,7 @@ import { MustMatch } from '../shared/helpers/must-match.validator';
 import { MustSelect } from '../shared/helpers/select-type.validator';
 
 // import custom password pattern
-import { AppSettings } from '../shared/helpers/settings';
+import { AppSettings } from '../../environments/environment';
 
 import { routerTransition } from '../router.animations';
 import { UserserviceService } from '../shared/services/userservice.service';
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
         });
     }
 
-    get f() {
+    get fetchValue() {
         return this.signupForm.controls;
     }
 
@@ -66,35 +66,24 @@ export class SignupComponent implements OnInit {
         if (this.signupForm.invalid) {
             return;
         }
-        // this.loading = true;
-        // this.data = this.signupForm.value;
-        // this.userService.registerUser(this.data).subscribe();
         this.insertRecord(this.signupForm);
-        // alert ('SUCCESS!!:-' + JSON.stringify(this.signupForm.value));
     }
     insertRecord(signupForm) {
         this.userService.registerUser(signupForm.value).subscribe( res => {
-            this.resetForm(signupForm);
-            console.log(res);
+            this.resetForm();
             this.loginUser();
         },
         error => {
             this.error = error;
-            this.loading = false;
         });
-
-        if (this.error = '') {
-
-        }
     }
 
-    resetForm(signupForm) {
-
+    resetForm() {
+        this.signupForm.reset();
     }
 
     loginUser() {
-        console.log('Method called');
-        this.authenticationService.login(this.f.email.value, this.f.password.value)
+        this.authenticationService.login(this.fetchValue.email.value, this.fetchValue.password.value)
             .pipe(first())
             .subscribe(
                 data => {

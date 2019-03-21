@@ -10,17 +10,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control input-underline" formControlName="firstName" placeholder="{{ 'First Name*' }}" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
-                                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                                    <div *ngIf="f.firstName.errors.required">First Name is required.</div>
+                                <input type="text" class="form-control input-underline" formControlName="firstName" placeholder="{{ 'First Name*' }}" [ngClass]="{ 'is-invalid': fetchValue.firstName.invalid && (fetchValue.firstName.dirty ||  fetchValue.firstName.touched) }">
+                                <div *ngIf="fetchValue.firstName.invalid && (fetchValue.firstName.dirty ||  fetchValue.firstName.touched)" class="invalid-feedback">
+                                    <div *ngIf="fetchValue.firstName.errors.required">First Name is required.</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control input-underline" formControlName="lastName" placeholder="{{ 'Last Name*' }}" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
-                                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                                    <div *ngIf="f.lastName.errors.required">Last Name is required.</div>
+                                <input type="text" class="form-control input-underline" formControlName="lastName" placeholder="{{ 'Last Name*' }}" [ngClass]="{ 'is-invalid': fetchValue.lastName.invalid && (fetchValue.lastName.dirty || fetchValue.lastName.touched) }">
+                                <div *ngIf="fetchValue.lastName.invalid && (fetchValue.lastName.dirty || fetchValue.lastName.touched)" class="invalid-feedback">
+                                    <div *ngIf="fetchValue.lastName.errors.required">Last Name is required.</div>
                                 </div>
                             </div>
                         </div>
@@ -29,20 +29,20 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control input-underline" formControlName="email" placeholder="{{ 'Email*' }}" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                    <div *ngIf="f.email.errors.required">Email is required.</div>
-                                    <div *ngIf="f.email.errors.email">Enter a valid email.</div>
+                                <input type="text" class="form-control input-underline" formControlName="email" placeholder="{{ 'Email*' }}" [ngClass]="{ 'is-invalid': fetchValue.email.errors && (fetchValue.email.dirty || fetchValue.email.touched) }">
+                                <div *ngIf=" fetchValue.email.errors && (fetchValue.email.dirty || fetchValue.email.touched)" class="invalid-feedback">
+                                    <div *ngIf="fetchValue.email.errors.required">Email is required.</div>
+                                    <div *ngIf="fetchValue.email.errors.email">Enter a valid email.</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <select class="form-control input-underline" formControlName="userType" [ngClass]="{ 'is-invalid': submitted && f.userType.errors }">
+                                <select class="form-control input-underline" formControlName="userType" [ngClass]="{ 'is-invalid': fetchValue.userType.invalid && (fetchValue.userType.dirty || fetchValue.userType.touched) }">
                                     <option class="option" *ngFor="let option of userType">{{ option }}</option> 
                                 </select>
-                                <div *ngIf="submitted && f.userType.errors" class="invalid-feedback">
-                                    <div *ngIf="f.userType.errors.mustSelect">You must Select User Type.</div>
+                                <div *ngIf="fetchValue.userType.errors && (fetchValue.userType.dirty || fetchValue.userType.touched)" class="invalid-feedback">
+                                    <div *ngIf="fetchValue.userType.errors.mustSelect">You must Select User Type.</div>
                                 </div>
                             </div>
                         </div>                    
@@ -50,92 +50,30 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="password" class="form-control input-underline" formControlName="password" placeholder="{{ 'Password*' }}" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                    <div *ngIf="f.password.errors.required">Password is required.</div>
-                                    <div *ngIf="f.password.errors.minlength">Password must be of at least 8 characters.</div>
-                                    <div *ngIf="f.password.errors.pattern">Password must contain any of the [! @ # $ %] special character and a number.</div>
+                                <input type="password" class="form-control input-underline" formControlName="password" placeholder="{{ 'Password*' }}" [ngClass]="{ 'is-invalid': fetchValue.password.invalid && (fetchValue.password.dirty || fetchValue.password.touched)}">
+                                <div *ngIf="fetchValue.password.invalid && (fetchValue.password.dirty || fetchValue.password.touched)" class="invalid-feedback">
+                                    <div *ngIf="fetchValue.password.errors.required">Password is required.</div>
+                                    <div *ngIf="fetchValue.password.errors.minlength">Password must be of at least 8 characters.</div>
+                                    <div *ngIf="fetchValue.password.errors.pattern">Password must contain any of the [! @ # $ %] special character and a number.</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="password" class="form-control input-underline" formControlName="confirmPassword" placeholder="{{ 'Confirm Password*' }}" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }">
-                                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                                    <div *ngIf="f.confirmPassword.errors.required">Password is required.</div>
-                                    <div *ngIf="f.confirmPassword.errors.minlength">Password must be of at least 8 characters.</div>
-                                    <div *ngIf="f.confirmPassword.errors.mustMatch">Your confirm password doesnot match with the entered password.</div>
-                                    <div *ngIf="f.confirmPassword.errors.pattern">Password must contain any of the [! @ # $ %] special character and a number.</div>
+                                <input type="password" class="form-control input-underline" formControlName="confirmPassword" placeholder="{{ 'Confirm Password*' }}" [ngClass]="{ 'is-invalid': fetchValue.confirmPassword.invalid && (fetchValue.confirmPassword.dirty || fetchValue.confirmPassword.touched) }">
+                                <div *ngIf="fetchValue.confirmPassword.invalid && (fetchValue.confirmPassword.dirty || fetchValue.confirmPassword.touched)" class="invalid-feedback">
+                                    <div *ngIf="fetchValue.confirmPassword.errors.required">Password is required.</div>
+                                    <div *ngIf="fetchValue.confirmPassword.errors.minlength">Password must be of at least 8 characters.</div>
+                                    <div *ngIf="fetchValue.confirmPassword.errors.mustMatch">Your confirm password doesnot match with the entered password.</div>
+                                    <div *ngIf="fetchValue.confirmPassword.errors.pattern">Password must contain any of the [! @ # $ %] special character and a number.</div>
                                 </div>
                             </div>
                         </div>
                     </div> 
                 </div>
-                <button [disabled]="loading" class="btn rounded-btn">Register</button>&nbsp;
+                <button [disabled]="signupForm.invalid" class="btn rounded-btn">Register</button>&nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/login']">{{ 'Login' }}</a>&nbsp;
             </form>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--div class="container">
-        <img class="user-avatar" src="assets/images/logotruck.png" width="150px" />
-        <form class="register-form">
-            <h3>Create account</h3>
-            <p><i><b>Fill out all the details to create an account</b></i></p>
-            <mat-form-field class="register-full-width">
-                <input matInput placeholder="Name*" autocomplete="off">
-                <mat-icon matSuffix>account_box</mat-icon>
-            </mat-form-field>
-          
-            <mat-form-field class="register-full-width">
-                <input matInput placeholder="Email*" autocomplete="off">
-                <mat-icon matSuffix>email</mat-icon>
-            </mat-form-field>
-          
-            <mat-form-field class="register-full-width">
-                <input matInput placeholder="Mobile Number*" autocomplete="off">
-                <mat-icon matSuffix>phone</mat-icon>
-            </mat-form-field>
-          
-            <mat-form-field class="register-full-width">
-                <mat-select placeholder="Register as a*">
-                   <mat-option disabled>Select an option</mat-option>
-                   <mat-option *ngFor="let user of userType" [value]="user.value">
-                        {{user.viewValue}}
-                    </mat-option>
-                </mat-select>
-                <mat-icon matSuffix>business</mat-icon>
-            </mat-form-field>
-          
-            <mat-form-field class="register-half-width-first">
-                <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
-            </mat-form-field>
-          
-            <mat-form-field class="register-half-width-last">
-                <input matInput placeholder="Confirm Password" [type]="hide ? 'password' : 'text'">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </mat-form-field>
-          
-            <a mat-raised-button color="primary"  [routerLink]="['/dashboard']" class="register-half-width-first">Register</a>
-            <a mat-raised-button color="primary"  [routerLink]="['/login']" class="register-half-width-last">Login</a>
-        </form>
-    </div>-->

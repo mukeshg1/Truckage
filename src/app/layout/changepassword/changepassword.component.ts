@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { UserserviceService } from '../../shared/services/userservice.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
@@ -8,7 +9,7 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 import { MustMatch } from '../../shared/helpers/must-match.validator';
 
 // import custom password pattern
-import { AppSettings } from '../../shared/helpers/settings';
+import { AppSettings } from '../../../environments/environment';
 
 @Component({
   selector: 'app-changepassword',
@@ -19,10 +20,12 @@ export class ChangepasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
   submitted = false;
   error = '';
+  success = [];
 
   constructor(private formBuilder: FormBuilder,
     private userService: UserserviceService,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    public router: Router) { }
 
   ngOnInit() {
     this.changePasswordForm = this.formBuilder.group({
@@ -50,11 +53,10 @@ export class ChangepasswordComponent implements OnInit {
     this.userService.changePassword(this.changePasswordForm.value).subscribe( data => {
       console.log(data);
       this.authenticationService.logout();
+      this.router.navigate(['/dashboard']);
     },
     error => {
         this.error = error;
-        console.log('Error');
-        console.log(this.error);
     });
   }
 
