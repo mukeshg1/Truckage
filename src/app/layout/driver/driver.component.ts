@@ -56,7 +56,7 @@ export class DriverComponent implements OnInit {
     this.driverForm = this.formBuilder.group({
       driverName: ['', Validators.required],
       driverLicenseNumber: ['', Validators.required],
-      driverLicenseType: [''],
+      driverLicenseType: ['', Validators.required],
       licenseIssuedDate: ['', Validators.required],
       licenseExpiryDate: ['', Validators.required],
       driverLicense: [null, Validators.required],
@@ -67,19 +67,18 @@ export class DriverComponent implements OnInit {
     });
   }
 
-  get f() {
+  get fetchValue() {
     return this.driverForm.controls;
   }
 
+  resetForm() {
+    this.driverForm.reset();
+  }
   onSubmit() {
-    this.submitted = true;
-    // console.log('Data Submitted');
     if (this.driverForm.invalid) {
       return;
     }
     alert ('SUCCESS!!:-' + JSON.stringify(this.driverForm.value));
-    location.reload();
-    // this.modalService.close('Submit');
   }
 
   openDriverDetailsModal(content) {

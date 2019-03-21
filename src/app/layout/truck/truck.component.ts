@@ -14,7 +14,6 @@ import { MustSelectTruck } from '../../shared/helpers/select-type.validator';
 })
 export class TruckComponent implements OnInit {
   truckForm: FormGroup;
-  submitted = false;
   trucks = 4;
   page = 1;
   size = 10;
@@ -67,13 +66,11 @@ export class TruckComponent implements OnInit {
     });
   }
 
-  get f() {
+  get fetchValue() {
     return this.truckForm.controls;
   }
 
   onSubmit() {
-    this.submitted = true;
-    // console.log('Data Submitted');
     if (this.truckForm.invalid) {
       return;
     }
@@ -84,7 +81,6 @@ export class TruckComponent implements OnInit {
 
   resetForm() {
     this.truckForm.reset();
-    this.truckForm.markAsPristine();
   }
 
   openTruckDetailsModal(content) {

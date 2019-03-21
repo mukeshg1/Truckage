@@ -8,21 +8,21 @@
                     <p><i>Use your credentials to login into your account.</i></p>
                     <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                     <div class="form-group">
-                        <input type="text" ng-model="name" class="form-control input-underline input-lg" formControlName="loginEmail" placeholder="{{ 'Email*' }}" [ngClass]="{ 'is-invalid': submitted && f.loginEmail.errors }">
-                        <div *ngIf="submitted && f.loginEmail.errors" class="invalid-feedback">
-                            <div *ngIf="f.loginEmail.errors.required">Email is required.</div>
-                            <div *ngIf="f.loginEmail.errors.email">Email must be valid.</div>
+                        <input type="text" ng-model="name" class="form-control input-underline input-lg" formControlName="loginEmail" placeholder="{{ 'Email*' }}" [ngClass]="{ 'is-invalid': fetchValue.loginEmail.invalid && (fetchValue.loginEmail.dirty || fetchValue.loginEmail.touched) }">
+                        <div *ngIf="fetchValue.loginEmail.invalid && (fetchValue.loginEmail.dirty || fetchValue.loginEmail.touched)" class="invalid-feedback">
+                            <div *ngIf="fetchValue.loginEmail.errors.required">Email is required.</div>
+                            <div *ngIf="fetchValue.loginEmail.errors.email">Email must be valid.</div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" formControlName="loginPassword" placeholder="{{ 'Password*' }}" [ngClass]="{ 'is-invalid': submitted && f.loginPassword.errors }">
-                        <div *ngIf="submitted && f.loginPassword.errors" class="invalid-feedback">
-                            <div *ngIf="f.loginPassword.errors.required">Password is required.</div>
+                        <input type="password" class="form-control input-underline input-lg" formControlName="loginPassword" placeholder="{{ 'Password*' }}" [ngClass]="{ 'is-invalid': fetchValue.loginPassword.invalid && (fetchValue.loginPassword.dirty || fetchValue.loginPassword.touched) }">
+                        <div *ngIf="fetchValue.loginPassword.invalid && (fetchValue.loginPassword.dirty || fetchValue.loginPassword.touched)" class="invalid-feedback">
+                            <div *ngIf="fetchValue.loginPassword.errors.required">Password is required.</div>
                         </div>
                     </div>
                 </div>
-                <button [disabled]="loading" class="btn rounded-btn">Login</button>&nbsp;
+                <button [disabled]="loginForm.invalid" class="btn rounded-btn">Login</button>&nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/signup']">{{ 'Register' }}</a>&nbsp;
             </form>
         </div>

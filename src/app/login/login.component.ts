@@ -39,19 +39,20 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    get f() {
+    // Get values entered in form
+    get fetchValue() {
         return this.loginForm.controls;
     }
     onSubmit() {
-        this.submitted = true;
+        // this.submitted = true;
 
         if (this.loginForm.invalid) {
             return;
         }
-        // alert ('Login SUCCESS!!:-' + JSON.stringify(this.loginForm.value));
-        this.loading = true;
-        // this.authenticationService.login(this.loginForm.value)
-        this.authenticationService.login(this.f.loginEmail.value, this.f.loginPassword.value)
+
+        console.log(this.fetchValue.loginEmail.value);
+        console.log(this.fetchValue.loginEmail.value);
+        this.authenticationService.login(this.fetchValue.loginEmail.value, this.fetchValue.loginPassword.value)
             .pipe(first())
             .subscribe(
                 data => {
@@ -61,6 +62,7 @@ export class LoginComponent implements OnInit {
                 error => {
                     this.error = error;
                     this.loading = false;
-                });
+        });
+        this.loginForm.reset();
     }
 }

@@ -21,12 +21,12 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Select Truck Type*</label>
-              <select class="form-control" formControlName="truckType" [ngClass]="{ 'is-invalid': submitted && f.truckType.errors}">
+              <select class="form-control" formControlName="truckType" [ngClass]="{ 'is-invalid': fetchValue.truckType.invalid && (fetchValue.truckType.dirty || fetchValue.truckType.touched)}">
                 <option *ngFor="let type of truckTypeList" >{{type}}</option>
               </select> 
-              <div *ngIf="submitted && f.truckType.errors" class="invalid-feedback">
-                  <div *ngIf="f.truckType.errors.required">Truck Type is required.</div>
-                <div *ngIf="f.truckType.errors.mustSelect">Truck Type is required.</div>
+              <div *ngIf="fetchValue.truckType.invalid && (fetchValue.truckType.dirty || fetchValue.truckType.touched)" class="invalid-feedback">
+                  <div *ngIf="fetchValue.truckType.errors.required">Truck Type is required.</div>
+                <div *ngIf="fetchValue.truckType.errors.mustSelect">Truck Type is required.</div>
               </div>
             </div>
           </div>
@@ -34,12 +34,12 @@
             <div class="form-group">
               <label>Truck Manufactured Date*</label>
               <div class="input-group">
-                <input class="form-control border-input" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" readonly formControlName="truckManufacturedDate" [ngClass]="{ 'is-invalid': submitted && f.truckManufacturedDate.errors }">
+                <input class="form-control border-input" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" readonly formControlName="truckManufacturedDate" [ngClass]="{ 'is-invalid': fetchValue.truckManufacturedDate.invalid && (fetchValue.truckManufacturedDate.dirty || fetchValue.truckManufacturedDate.touched) }">
                 <div class="input-group-append">
                   <button  type="button" class="form-control border-input btn btn-outline-secondary calendar" (click)="d.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
                 </div>
-                <div *ngIf="submitted && f.truckManufacturedDate.errors" class="invalid-feedback">
-                  <div *ngIf="f.truckManufacturedDate.errors.required">Truck Manufactured Date is required.</div>
+                <div *ngIf="fetchValue.truckManufacturedDate.invalid && (fetchValue.truckManufacturedDate.dirty || fetchValue.truckManufacturedDate.touched)" class="invalid-feedback">
+                  <div *ngIf="fetchValue.truckManufacturedDate.errors.required">Truck Manufactured Date is required.</div>
                 </div>
               </div>
             </div>
@@ -47,9 +47,9 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>License Plate Number*</label>
-              <input type="text" class="form-control border-input" formControlName="licensePlateNumber" [ngClass]="{ 'is-invalid': submitted && f.licensePlateNumber.errors }"> 
-              <div *ngIf="submitted && f.licensePlateNumber.errors" class="invalid-feedback">
-                <div *ngIf="f.licensePlateNumber.errors.required">license Plate Number is required.</div>
+              <input type="text" class="form-control border-input" formControlName="licensePlateNumber" [ngClass]="{ 'is-invalid': fetchValue.licensePlateNumber.invalid && (fetchValue.licensePlateNumber.dirty || fetchValue.licensePlateNumber.touched) }"> 
+              <div *ngIf="fetchValue.licensePlateNumber.invalid && (fetchValue.licensePlateNumber.dirty || fetchValue.licensePlateNumber.touched)" class="invalid-feedback">
+                <div *ngIf="fetchValue.licensePlateNumber.errors.required">License Plate Number is required.</div>
               </div>
             </div>
           </div>
@@ -60,27 +60,27 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Registration Certificate*</label>
-              <input type="file" class="form-control border-input" formControlName="registrationCertificate" [ngClass]="{ 'is-invalid': submitted && f.registrationCertificate.errors }">
-              <div *ngIf="submitted && f.registrationCertificate.errors" class="invalid-feedback">
-                <div *ngIf="f.registrationCertificate.errors.required">Truck Registration Certificate is required.</div>
+              <input type="file" class="form-control border-input" formControlName="registrationCertificate" [ngClass]="{ 'is-invalid': fetchValue.registrationCertificate.invalid && (fetchValue.registrationCertificate.dirty || fetchValue.registrationCertificate.touched) }">
+              <div *ngIf="fetchValue.registrationCertificate.invalid && (fetchValue.registrationCertificate.dirty || fetchValue.registrationCertificate.touched)" class="invalid-feedback">
+                <div *ngIf="fetchValue.registrationCertificate.errors.required">Truck Registration Certificate is required.</div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Insurance Document*</label>
-              <input type="file" class="form-control border-input" formControlName="insuranceDocument" [ngClass]="{ 'is-invalid': submitted && f.insuranceDocument.errors }">
-              <div *ngIf="submitted && f.insuranceDocument.errors" class="invalid-feedback">
-                <div *ngIf="f.insuranceDocument.errors.required">Insurance Document is required.</div>
+              <input type="file" class="form-control border-input" formControlName="insuranceDocument" [ngClass]="{ 'is-invalid': fetchValue.insuranceDocument.invalid && (fetchValue.insuranceDocument.dirty || fetchValue.insuranceDocument.touched) }">
+              <div *ngIf="fetchValue.insuranceDocument.invalid && (fetchValue.insuranceDocument.dirty || fetchValue.insuranceDocument.touched)" class="invalid-feedback">
+                <div *ngIf="fetchValue.insuranceDocument.errors.required">Insurance Document is required.</div>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Pollution Document*</label>
-              <input type="file" class="form-control border-input" formControlName="pollutionDocument" [ngClass]="{ 'is-invalid': submitted && f.pollutionDocument.errors }">
-              <div *ngIf="submitted && f.pollutionDocument.errors" class="invalid-feedback">
-                <div *ngIf="f.pollutionDocument.errors.required">pollution Document is required.</div>
+              <input type="file" class="form-control border-input" formControlName="pollutionDocument" [ngClass]="{ 'is-invalid': fetchValue.pollutionDocument.invalid && (fetchValue.pollutionDocument.dirty || fetchValue.pollutionDocument.touched)}">
+              <div *ngIf="fetchValue.pollutionDocument.invalid && (fetchValue.pollutionDocument.dirty || fetchValue.pollutionDocument.touched)" class="invalid-feedback">
+                <div *ngIf="fetchValue.pollutionDocument.errors.required">pollution Document is required.</div>
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-danger" (click)="regmodal.close('Close Click'); resetForm();">Close</button>
-        <button [disabled]="loading" type="submit" class="btn btn-info btn-fill btn-wd">Submit</button>
+        <button [disabled]="truckForm.invalid" type="submit" class="btn btn-info btn-fill btn-wd">Submit</button>
       </div>
     </form>
   </ng-template>
