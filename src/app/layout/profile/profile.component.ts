@@ -18,7 +18,7 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
   UserName = '';
   UserEmail = 'mindfire@email.com';
   submitted = false;
-
+  error = '';
   @ViewChild('form')
   profileForm: FormGroup;
 
@@ -43,7 +43,7 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
       mobileNumber: ['', Validators.required],
       idType: ['', Validators.required],
       idNumber: ['', Validators.required],
-      id: ['', Validators.required],
+      document: ['', Validators.required],
       locality: ['', Validators.required],
       landmark: ['', Validators.required],
       city: ['', Validators.required],
@@ -63,6 +63,13 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
     if (this.profileForm.invalid) {
       return;
     }
+    this.userService.updateProfile(this.profileForm.value).subscribe( res => {
+      console.log(res);
+      this.profileForm.reset();
+    },
+    error => {
+        this.error = error;
+    });
     alert ('SUCCESS!!:-' + JSON.stringify(this.profileForm.value));
   }
 

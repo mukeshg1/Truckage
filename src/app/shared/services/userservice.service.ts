@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable, Subject} from 'rxjs';
 
 import { AppSettings } from '../../../environments/environment';
-import { RegisterData, changePasswordData } from '../models/data';
+import { RegisterData, ChangePasswordData, UpdateProfileData } from '../models/data';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,12 @@ export class UserserviceService {
     return  'Mindfire Solutions';
   }
 
-  changePassword(changeData: changePasswordData) {
-    return this.http.post('http://172.16.9.102/industrial-transportation-slim/public/private/v1/change-password', changeData);
+  changePassword(changeData: ChangePasswordData) {
+    return this.http.post(AppSettings.privateUrl + '/change-password', changeData);
+  }
+
+  updateProfile(updateData: UpdateProfileData) {
+    console.log(updateData);
+    return this.http.post(AppSettings.privateUrl + '/update-user-information', updateData);
   }
 }

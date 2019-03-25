@@ -7,8 +7,26 @@ export class RegisterData {
     token?: string;
 }
 
-export class changePasswordData {
+export class ChangePasswordData {
     oldPassword: string;
     newPassword: string;
     confirmNewPassword: string;
+}
+
+export class UpdateProfileData {
+    companyName: string;
+    // email: string;
+    // firstName: string;
+    // lastName:string;
+    gender: string;
+    dob: string;
+    mobileNumber: string;
+    idType: string;
+    idNumber: string;
+    document: string | any;
+    locality: string;
+    landmark: string;
+    city: string;
+    country: string;
+    postalCode: number;
 }

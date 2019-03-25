@@ -52,6 +52,7 @@
               <h4 class="title">Profile</h4>
             </div>
             <div class="content">
+              <div *ngIf="error" class="alert alert-danger">{{error}}</div>
               <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                 <div class="row">
                   <div class="col-md-12">
@@ -149,9 +150,9 @@
                   </div>
                   <div class="col-md-4">
                     <label>Upload Id*</label>
-                    <input type="file" class="form-control border-input" formControlName="id" [ngClass]="{ 'is-invalid': fetchValue.id.invalid && (fetchValue.id.dirty || fetchValue.id.touched) }">
-                    <div *ngIf="fetchValue.id.invalid && (fetchValue.id.dirty || fetchValue.id.touched)" class="invalid-feedback">
-                        <div *ngIf="fetchValue.id.errors.required">Please upload your Id.</div>
+                    <input type="file" class="form-control border-input" formControlName="document" [ngClass]="{ 'is-invalid': fetchValue.document.invalid && (fetchValue.document.dirty || fetchValue.document.touched) }">
+                    <div *ngIf="fetchValue.document.invalid && (fetchValue.document.dirty || fetchValue.document.touched)" class="invalid-feedback">
+                        <div *ngIf="fetchValue.document.errors.required">Please upload your Id.</div>
                     </div>
                   </div>
                 </div>
