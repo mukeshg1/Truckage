@@ -75,8 +75,10 @@ export class TruckComponent implements OnInit {
       return;
     }
     alert ('SUCCESS!!:-' + JSON.stringify(this.truckForm.value));
-    console.log('Added');
-    location.reload();
+    console.log(this.truckForm.value);
+    console.log(this.fetchValue.insuranceDocument);
+    // console.log('Added');
+    // location.reload();
   }
 
   resetForm() {

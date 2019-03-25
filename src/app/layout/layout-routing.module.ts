@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout.component';
+import { CanDeactivateGuard } from '../shared/formGuard/can-deactivate.guard';
+
 
 const routes: Routes = [
     {
@@ -31,7 +33,8 @@ const routes: Routes = [
             },
             {
                 path: 'profile',
-                loadChildren: './profile/profile.module#ProfileModule'
+                loadChildren: './profile/profile.module#ProfileModule',
+                // canDeactivate: [CanDeactivateGuard]
             },
             {
                 path: 'driver',

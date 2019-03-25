@@ -8,6 +8,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
+import { CanDeactivateGuard } from '../shared/formGuard/can-deactivate.guard';
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import { HeaderComponent } from './components/header/header.component';
         NgbModule,
         NgbDropdownModule
     ],
-    declarations: [LayoutComponent, SidebarComponent, HeaderComponent]
+    declarations: [LayoutComponent, SidebarComponent, HeaderComponent],
+    providers: [CanDeactivateGuard],
 })
 export class LayoutModule {}
