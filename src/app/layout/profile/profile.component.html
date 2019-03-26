@@ -11,6 +11,7 @@
             <div class="content">
               <div class="author">
                 <img class="avatar border-white" src="assets/images/faces/face-2.jpg" alt="..."/>
+                <!-- <img class="avatar" height="100" [src]="url" alt="..."/> -->
                 <h4 class="title">{{UserName}}
                   <i *ngIf="verified" class="fa fa-check-circle" aria-hidden="true" style="color: rgb(134, 128, 67);"></i>
                 </h4>
@@ -53,6 +54,7 @@
             </div>
             <div class="content">
               <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+              <img [src]="url" height="200"> <br/>
               <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                 <div class="row">
                   <div class="col-md-12">
@@ -150,10 +152,11 @@
                   </div>
                   <div class="col-md-4">
                     <label>Upload Id*</label>
-                    <input type="file" class="form-control border-input" formControlName="document" [ngClass]="{ 'is-invalid': fetchValue.document.invalid && (fetchValue.document.dirty || fetchValue.document.touched) }">
+                    <input type="file" class="form-control border-input" formControlName="document" (change)="onFileChange($event)" [ngClass]="{ 'is-invalid': fetchValue.document.invalid && (fetchValue.document.dirty || fetchValue.document.touched) }" />
                     <div *ngIf="fetchValue.document.invalid && (fetchValue.document.dirty || fetchValue.document.touched)" class="invalid-feedback">
                         <div *ngIf="fetchValue.document.errors.required">Please upload your Id.</div>
                     </div>
+                    <button (click)="onUpload()">Upload</button>
                   </div>
                 </div>
                 <label>Address*</label>

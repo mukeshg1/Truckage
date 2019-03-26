@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { routerTransition } from '../../router.animations';
@@ -21,12 +21,15 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
   error = '';
   @ViewChild('form')
   profileForm: FormGroup;
+  selectedFile: File;
+  url = '';
+  uploadData: FormData;
 
   Gender: string[] = ['--Select Gender--', 'Male', 'Female'];
 
   idType: string[] = ['--Select Id Type--', 'Aadhar Card', 'Voter Card', 'PAN Card', 'Passport'];
 
-  constructor(private formBuilder: FormBuilder, private userService: UserserviceService) {
+  constructor(private formBuilder: FormBuilder, private userService: UserserviceService, private cd: ChangeDetectorRef) {
     super();
   }
 
@@ -43,7 +46,7 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
       mobileNumber: ['', Validators.required],
       idType: ['', Validators.required],
       idNumber: ['', Validators.required],
-      document: ['', Validators.required],
+      document: [null, Validators.required],
       locality: ['', Validators.required],
       landmark: ['', Validators.required],
       city: ['', Validators.required],
@@ -63,6 +66,7 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
     if (this.profileForm.invalid) {
       return;
     }
+    console.log(this.fetchValue.document);
     this.userService.updateProfile(this.profileForm.value).subscribe( res => {
       console.log(res);
       this.profileForm.reset();
@@ -73,4 +77,31 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
     alert ('SUCCESS!!:-' + JSON.stringify(this.profileForm.value));
   }
 
+
+  onFileChange(event) {
+    console.log('Clicked');
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile, this.selectedFile.name);
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(event.target.files[0]);
+    // tslint:disable-next-line: no-shadowed-variable
+    reader.onload = (event: any) => {
+      this.url = event.target.result;
+    };
+  }
+
+  onUpload() {
+    console.log('Clicked here');
+    this.uploadData = new FormData();
+    this.uploadData.append('document', this.selectedFile, this.selectedFile.name);
+    console.log(this.uploadData.has('document'));
+    this.userService.fileUpload(this.uploadData).subscribe( res => {
+      console.log(res); // handle event here
+    },
+    error => {
+      console.log(error);
+    });
+  }
 }

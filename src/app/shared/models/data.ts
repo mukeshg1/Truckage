@@ -23,10 +23,14 @@ export class UpdateProfileData {
     mobileNumber: string;
     idType: string;
     idNumber: string;
-    document: string | any;
+    document: File | any;
     locality: string;
     landmark: string;
     city: string;
     country: string;
     postalCode: number;
+}
+
+export class FileData {
+    file: File;
 }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable, Subject} from 'rxjs';
 
 import { AppSettings } from '../../../environments/environment';
-import { RegisterData, ChangePasswordData, UpdateProfileData } from '../models/data';
+import { RegisterData, ChangePasswordData, UpdateProfileData, FileData } from '../models/data';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,13 @@ export class UserserviceService {
   updateProfile(updateData: UpdateProfileData) {
     console.log(updateData);
     return this.http.post(AppSettings.privateUrl + '/update-user-information', updateData);
+  }
+
+  fileUpload(File) {
+    console.log('File = ', File);
+    return this.http.post(AppSettings.privateUrl + '/photo', File, {
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 }
