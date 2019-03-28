@@ -7,9 +7,10 @@ import { CanDeactivateGuard } from '../../shared/formGuard/can-deactivate.guard'
 import { ProfileComponent } from './profile.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { PageHeaderModule } from './../../shared';
+import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [ProfileComponent, UpdateprofileComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

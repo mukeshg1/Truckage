@@ -29,10 +29,6 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
   uploadData: FormData;
   uploadPercent = 0;
 
-  Gender: string[] = ['--Select Gender--', 'Male', 'Female'];
-
-  idType: string[] = ['--Select Id Type--', 'Aadhar Card', 'Voter Card', 'PAN Card', 'Passport'];
-
   constructor(private formBuilder: FormBuilder, private userService: UserserviceService,
     private authService: AuthenticationService) {
     super();
@@ -43,45 +39,9 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
     this.UserEmail = JSON.parse(localStorage.getItem('currentUser')).email;
     this.UserName = JSON.parse(localStorage.getItem('currentUser')).firstName +
                     ' ' + JSON.parse(localStorage.getItem('currentUser')).lastName;
-    this.profileForm = this.formBuilder.group({
-      companyName: ['', Validators.required],
-      // email: ['', [Validators.required, Validators.email]],
-      // firstName: ['', Validators.required],
-      // lastName: ['', Validators.required],
-      gender: ['', Validators.required],
-      dob: ['', Validators.required],
-      mobileNumber: ['', Validators.required],
-      idType: ['', Validators.required],
-      idNumber: ['', Validators.required],
-      document: [null, Validators.required],
-      locality: ['', Validators.required],
-      landmark: ['', Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      postalCode: ['', Validators.required]
-    },
-    {
-      validators: [MustSelectGender('gender'), MustSelectId('idType')]
-    });
   }
   get fetchValue() {
     return this.profileForm.controls;
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    if (this.profileForm.invalid) {
-      return;
-    }
-    console.log(this.fetchValue.document);
-    this.userService.updateProfile(this.profileForm.value).subscribe( res => {
-      console.log(res);
-      this.profileForm.reset();
-    },
-    error => {
-        this.error = error;
-    });
-    alert ('SUCCESS!!:-' + JSON.stringify(this.profileForm.value));
   }
 
   // File gets uploaded on change event
@@ -107,9 +67,9 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
       } else if (upload.type === HttpEventType.Response) {
         console.log(upload);
       }
-      if (this.uploadPercent === 100) {
-        this.getImage();
-      }
+      // if (this.uploadPercent === 100) {
+      //   this.getImage();
+      // }
     },
     error => {
       console.log(error);

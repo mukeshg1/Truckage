@@ -22,7 +22,6 @@ export class UserserviceService {
   }
 
   updateProfile(updateData: UpdateProfileData) {
-    console.log(updateData);
     return this.http.post(AppSettings.privateUrl + '/update-user-information', updateData);
   }
 
