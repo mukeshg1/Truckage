@@ -70,8 +70,8 @@ export class SignupComponent implements OnInit {
     }
     insertRecord(signupForm) {
         this.userService.registerUser(signupForm.value).subscribe( res => {
-            this.resetForm();
             this.loginUser();
+            // this.resetForm();
         },
         error => {
             this.error = error;

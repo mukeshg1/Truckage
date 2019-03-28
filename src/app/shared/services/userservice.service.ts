@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEventType  } from '@angular/common/http';
 import { Observable, Subject} from 'rxjs';
 
 import { AppSettings } from '../../../environments/environment';
@@ -17,11 +17,6 @@ export class UserserviceService {
     return this.http.post(AppSettings.Url + '/register', registerData);
   }
 
-  // Get Name of the User
-  getName() {
-    return  'Mindfire Solutions';
-  }
-
   changePassword(changeData: ChangePasswordData) {
     return this.http.post(AppSettings.privateUrl + '/change-password', changeData);
   }
@@ -32,10 +27,16 @@ export class UserserviceService {
   }
 
   fileUpload(File) {
-    console.log('File = ', File);
-    return this.http.post(AppSettings.privateUrl + '/photo', File, {
+    return this.http.post(AppSettings.privateUrl + '/upload-document/ProfilePic', File, {
+    // return this.http.post('http://localhost/SlimTruckage/public/api/image', File, {
       reportProgress: true,
       observe: 'events'
     });
+  }
+
+
+  fileView() {
+    return this.http.get<any>(AppSettings.privateUrl + '/view-document/ProfilePic');
+    // return this.http.get('http://localhost/SlimTruckage/public/api/image/fetch');
   }
 }
