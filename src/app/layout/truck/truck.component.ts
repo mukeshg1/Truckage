@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { routerTransition } from '../../router.animations';
 import { MustSelectTruck } from '../../shared/helpers/select-type.validator';
+import { UserserviceService } from '../../shared/services/userservice.service';
 
 @Component({
   selector: 'app-truck',
@@ -48,7 +49,10 @@ export class TruckComponent implements OnInit {
   ];
 
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, config: NgbModalConfig) {
+  constructor(private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+    config: NgbModalConfig,
+    private userService: UserserviceService) {
     config.backdrop = 'static';
   }
 
@@ -75,10 +79,9 @@ export class TruckComponent implements OnInit {
       return;
     }
     alert ('SUCCESS!!:-' + JSON.stringify(this.truckForm.value));
-    console.log(this.truckForm.value);
-    console.log(this.fetchValue.insuranceDocument);
-    // console.log('Added');
-    // location.reload();
+    this.userService.truckProfile(this.truckForm.value).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 
   resetForm() {

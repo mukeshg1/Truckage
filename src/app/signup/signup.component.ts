@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
     loading = false;
     returnUrl: string;
 
-    userType: string[] = ['--Select User Type--', 'Vehicle Owner/Client', 'Vehicle Borrower/Customer', 'Driver'];
+    userType: string[] = ['--Select User Type--', 'Vehicle Owner/Client', 'Vehicle Borrower/Customer'];
     default = 'Vehicle Owner/Client';
 
     constructor(
@@ -83,12 +83,12 @@ export class SignupComponent implements OnInit {
     }
 
     loginUser() {
+        console.log(this.fetchValue.email.value, this.fetchValue.password.value);
         this.authenticationService.login(this.fetchValue.email.value, this.fetchValue.password.value)
             .pipe(first())
             .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
-                    console.log(data);
                 },
                 error => {
                     this.error = error;

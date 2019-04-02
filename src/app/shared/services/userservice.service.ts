@@ -33,6 +33,10 @@ export class UserserviceService {
     });
   }
 
+  truckProfile(truckData: any) {
+    return this.http.post(AppSettings.privateUrl + '/update-truck-information', truckData);
+  }
+
 
   fileView() {
     return this.http.get<any>(AppSettings.privateUrl + '/view-document/ProfilePic');
