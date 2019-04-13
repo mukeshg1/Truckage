@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthenticationService } from '../../../shared/services/authentication.service';
+import { UserserviceService } from 'src/app/shared/services/userservice.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -16,7 +17,9 @@ export class SidebarComponent implements OnInit {
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(public router: Router, private authenticationService: AuthenticationService) {
+    constructor(public router: Router,
+        private authenticationService: AuthenticationService,
+        private userService: UserserviceService) {
 
         this.router.events.subscribe(val => {
             if (
@@ -34,8 +37,7 @@ export class SidebarComponent implements OnInit {
         this.collapsed = false;
         this.showMenu = '';
         this.pushRightClass = 'push-right';
-        this.UserName = JSON.parse(localStorage.getItem('currentUser')).firstName +
-                        ' ' + JSON.parse(localStorage.getItem('currentUser')).lastName;
+        this.userInformation();
     }
 
 
@@ -68,6 +70,12 @@ export class SidebarComponent implements OnInit {
 
     logout() {
         this.authenticationService.logout();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/homeage']);
+    }
+
+    userInformation() {
+        this.userService.fetchUserInformation().subscribe((data: any) => {
+        this.UserName = data.Information.UserFirstName_xt + ' ' + data.Information.UserLastName_xt;
+        });
     }
 }

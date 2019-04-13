@@ -27,9 +27,13 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.UserName = JSON.parse(localStorage.getItem('currentUser')).firstName +
-        ' ' + JSON.parse(localStorage.getItem('currentUser')).lastName;
+        this.userInformation();
         this.pushRightClass = 'push-right';
+    }
+    userInformation() {
+        this.userService.fetchUserInformation().subscribe((data: any) => {
+        this.UserName = data.Information.UserFirstName_xt + ' ' + data.Information.UserLastName_xt;
+        });
     }
 
     isToggled(): boolean {
@@ -49,6 +53,6 @@ export class HeaderComponent implements OnInit {
 
     logout() {
         this.authenticationService.logout();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/homepage']);
     }
 }

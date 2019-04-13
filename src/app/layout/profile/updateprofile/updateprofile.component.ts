@@ -15,6 +15,7 @@ export class UpdateprofileComponent implements OnInit {
   uploadData: FormData;
   uploadPercent = 0;
   selectedFile: File;
+  lock = false;
 
   Gender: string[] = ['--Select Gender--', 'Male', 'Female'];
 
@@ -24,6 +25,7 @@ export class UpdateprofileComponent implements OnInit {
     private userService: UserserviceService) { }
 
   ngOnInit() {
+    this.userInformation();
     this.profileForm = this.formBuilder.group({
       companyName: ['', Validators.required],
       // email: ['', [Validators.required, Validators.email]],
@@ -34,7 +36,7 @@ export class UpdateprofileComponent implements OnInit {
       mobileNumber: ['', Validators.required],
       idType: ['', Validators.required],
       idNumber: ['', Validators.required],
-      document: [null, Validators.required],
+      // document: [null, Validators.required],
       locality: ['', Validators.required],
       landmark: ['', Validators.required],
       city: ['', Validators.required],
@@ -44,7 +46,6 @@ export class UpdateprofileComponent implements OnInit {
     {
       validators: [MustSelectGender('gender'), MustSelectId('idType')]
     });
-    this.setValue();
   }
   get fetchValue() {
     return this.profileForm.controls;
@@ -54,11 +55,18 @@ export class UpdateprofileComponent implements OnInit {
     if (this.profileForm.invalid) {
       return;
     }
+    // const payload = Object.assign({}, this.profileForm.value);
+    // payload.dob = this.profileForm.value.dob.month + '/' + this.profileForm.value.dob.day + '/' + this.profileForm.value.dob.year;
+    // console.log('payload = ', payload);
     this.userService.updateProfile(this.profileForm.value).subscribe( (res: any) => {
-      console.log(res);
+      window.alert(res.message);
+      location.reload();
     },
     error => {
+        console.log(error);
         this.error = error;
+        // window.alert(this.error);
+        // location.reload();
     });
   }
 
@@ -77,20 +85,32 @@ export class UpdateprofileComponent implements OnInit {
     });
   }
 
-  setValue() {
+  userInformation() {
+    this.userService.fetchUserInformation().subscribe((data: any) => {
+    this.lock = !this.lock;
     this.profileForm.patchValue({
-      companyName: 'Mindfire',
-      gender: 'Male',
-      dob: '',
-      mobileNumber: '1234567890',
-      idType: 'Aadhar Card',
-      idNumber: 'sdsd122',
-      document: null,
-      locality: 'bbsr',
-      landmark: 'dlf ',
-      city: 'bbsr',
-      country: 'India',
-      postalCode: '1212'
+      // companyName: data.Information.Email_xt,
+      gender: data.Information.Gender_xt,
+      dob: data.Information.DateOfBirth_xd,
+      mobileNumber: data.Information.Mobile_xn,
+      idType: data.Information.GovernmentIdType_xt,
+      idNumber: data.Information.GovernmentIdNumber_xt,
+      // document: data.Information,
+      locality: data.Address.Locality_xt,
+      landmark: data.Address.Landmark_xt,
+      city: data.Address.City_xt,
+      country: data.Address.Country_xt,
+      postalCode: data.Address.Pincode_xn
     });
+  },
+  error => {
+    this.lock = !this.lock;
+    console.log(error);
+    this.error = 'Error fetching data. Please try again later.';
+  });
+  }
+
+  unlockForm() {
+    this.lock = !this.lock;
   }
 }

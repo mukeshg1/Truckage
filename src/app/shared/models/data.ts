@@ -23,7 +23,7 @@ export class UpdateProfileData {
     mobileNumber: string;
     idType: string;
     idNumber: string;
-    document: File | any;
+    // document: File | any;
     locality: string;
     landmark: string;
     city: string;

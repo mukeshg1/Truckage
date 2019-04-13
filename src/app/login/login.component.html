@@ -1,7 +1,16 @@
+<section id="hero">
 <div class="login-page" [@routerTransition]>
+    <nav class="nav nav-pills">
+        <ul class="nav-menu">
+            <li style="font-weight: 900;">TRUCKAGE</li>
+            <li><a [routerLink]="['/homepage']">Home</a></li>
+            <li class="menu-active"><a [routerLink]="['/login']">{{ 'login' }}</a></li>
+            <li><a [routerLink]="['/signup']">{{ 'Register' }}</a></li>
+        </ul>
+    </nav>
     <div class="row justify-content-md-center">
         <div class="col-md-4">
-            <img src="assets/images/logotruck.png" width="150px" class="user-avatar" />
+            <img style="margin-top: 15px;" src="assets/images/logotruck.png" width="150px" class="user-avatar" />
             <h1>Log into Truckage</h1>
             <form role="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-content text-left">
@@ -26,5 +35,6 @@
                 <a class="btn rounded-btn" [routerLink]="['/signup']">{{ 'Register' }}</a>&nbsp;
             </form>
         </div>
-    </div>
+    </div>  
 </div>
+</section>

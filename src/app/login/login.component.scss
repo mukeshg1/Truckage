@@ -1,6 +1,12 @@
-$topnav-background-color: rgb(53, 52, 52);
+$topnav-background-color: rgba(44, 45, 46, 0.9);
+$background-url: url(../../assets/images/truck-bg.jpg);
+@import "../homepage/homepage.component.scss";
 :host {
     display: block;
+}
+.background-container{
+    background: $background-url top center;
+    background-size: cover;
 }
 .login-page {
     position: absolute;
@@ -9,7 +15,7 @@ $topnav-background-color: rgb(53, 52, 52);
     right: 0;
     bottom: 0;
     overflow: auto;
-    background: $topnav-background-color;
+    // background: $topnav-background-color;
     text-align: center;
     color: rgb(238, 241, 236);
     padding: 3em;
@@ -42,6 +48,7 @@ $topnav-background-color: rgb(53, 52, 52);
         -webkit-border-radius: 50px;
         border-radius: 50px;
         color: rgba(255, 255, 255, 0.8);
+        // background: $background-url;
         background: $topnav-background-color;
         border: 2px solid rgba(255, 255, 255, 0.8);
         font-size: 18px;

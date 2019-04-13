@@ -1,5 +1,6 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-<div class="row">
+<form [ngClass]="{'lock': lock}" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  <div class="row">
     <div class="col-md-6">
       <div class="form-group">
         <label>Company*</label>
@@ -37,7 +38,7 @@
       <div class="form-group">
         <label>Date of Birth*</label>
         <div class="input-group">
-          <input readonly class="form-control border-input" ngbDatepicker #i="ngbDatepicker" (click)="i.toggle()" formControlName="dob" placeholder="Date of Birth" [ngClass]="{ 'is-invalid': fetchValue.dob.invalid && (fetchValue.dob.dirty || fetchValue.dob.touched) }">
+          <input class="form-control border-input" type="date" formControlName="dob" placeholder="Date of Birth" [ngClass]="{ 'is-invalid': fetchValue.dob.invalid && (fetchValue.dob.dirty || fetchValue.dob.touched) }">
           <div class="input-group-append">
             <button type="button" class="form-control border-input btn btn-outline-secondary calendar" (click)="i.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
           </div>
@@ -77,16 +78,16 @@
           <div *ngIf="fetchValue.idNumber.errors.required">Id Number is required.</div>
       </div>
     </div>
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <label>Upload Id*</label>
       <input type="file" class="form-control border-input" formControlName="document" (change)="onFileChange($event)" [ngClass]="{ 'is-invalid': fetchValue.document.invalid && (fetchValue.document.dirty || fetchValue.document.touched) }" />
       <div *ngIf="fetchValue.document.invalid && (fetchValue.document.dirty || fetchValue.document.touched)" class="invalid-feedback">
           <div *ngIf="fetchValue.document.errors.required">Please upload your Id.</div>
       </div>
-    </div>
+    </div> -->
   </div>
   <label>Address*</label>
-  <div class="card content">
+  <div style="padding:10px;" class="card content">
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
@@ -137,8 +138,11 @@
       </div>
     </div>
   </div>
-  <div class="text-center">
-    <button [disabled]="profileForm.invalid" type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+  <div style="margin-top: 10px;" class="text-center">
+    <button *ngIf = "lock === false" [disabled]="profileForm.invalid" type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+    <!-- <button *ngIf = "lock === false" (click)="unlockForm()" class="btn btn-info btn-fill btn-wd">Cancel</button> -->
   </div>
-  <div class="clearfix"></div>
 </form>
+<div style="margin-top: 10px;" class="text-center">
+  <button title="Click here to edit your profile." *ngIf = "lock === true" class="btn btn-info btn-fill btn-wd" (click)="unlockForm()">Edit Profile</button>
+</div>

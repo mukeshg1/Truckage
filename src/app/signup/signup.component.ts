@@ -30,7 +30,6 @@ export class SignupComponent implements OnInit {
     returnUrl: string;
 
     userType: string[] = ['--Select User Type--', 'Vehicle Owner/Client', 'Vehicle Borrower/Customer'];
-    default = 'Vehicle Owner/Client';
 
     constructor(
         private formBuilder: FormBuilder,

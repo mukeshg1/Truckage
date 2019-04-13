@@ -42,4 +42,8 @@ export class UserserviceService {
     return this.http.get<any>(AppSettings.privateUrl + '/view-document/ProfilePic');
     // return this.http.get('http://localhost/SlimTruckage/public/api/image/fetch');
   }
+
+  fetchUserInformation() {
+    return this.http.get<any>(AppSettings.privateUrl + '/view-user-information');
+  }
 }

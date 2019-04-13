@@ -10,6 +10,10 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'homepage',
+        loadChildren: './homepage/homepage.module#HomepageModule'
+    },
+    {
         path: 'login',
         loadChildren: './login/login.module#LoginModule'
     },

@@ -36,9 +36,7 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
 
   ngOnInit() {
     this.getImage();
-    this.UserEmail = JSON.parse(localStorage.getItem('currentUser')).email;
-    this.UserName = JSON.parse(localStorage.getItem('currentUser')).firstName +
-                    ' ' + JSON.parse(localStorage.getItem('currentUser')).lastName;
+    this.userInformation();
   }
   get fetchValue() {
     return this.profileForm.controls;
@@ -82,18 +80,12 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
       this.url = AppSettings.imageUrl + data.document;
     });
   }
+  userInformation() {
+    this.userService.fetchUserInformation().subscribe((data: any) => {
+    this.UserName = data.Information.UserFirstName_xt + ' ' + data.Information.UserLastName_xt;
+    this.UserEmail = data.Information.Email_xt;
+
+    });
+  }
+
 }
-
-
-// onUpload() {
-//   console.log('Clicked here');
-//   this.uploadData = new FormData();
-//   this.uploadData.append('document', this.selectedFile, this.selectedFile.name);
-//   console.log(this.uploadData.has('document'));
-//   this.userService.fileUpload(this.uploadData).subscribe( res => {
-//     console.log(res); // handle event here
-//   },
-//   error => {
-//     console.log(error);
-//   });
-// }
