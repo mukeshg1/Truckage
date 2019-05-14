@@ -43,7 +43,12 @@
   <div class="hero-container">
     <h1>Welcome to Truckage</h1>
     <h2>Rent a Truck on few clicks.</h2>
-    <a [routerLink]="['/signup']" class="btn-get-started">Register Here</a>
+    <ul class="nav-menu">
+      <li><a [routerLink]="['/signup']" class="btn-get-started">Register Here</a></li>
+      <li><a [routerLink]="['/bookTruck']" class="btn-get-started">Rent a Truck</a></li>
+    </ul>
+    
+    
   </div>
 </section><!-- #hero -->
 
@@ -54,12 +59,6 @@
   Footer
 ============================-->
 <footer id="footer">
-  <div class="footer-top">
-    <div class="container">
-
-    </div>
-  </div>
-
   <div class="container">
     <div class="copyright">
       &copy; Copyright <strong>Truckage</strong>. All Rights Reserved

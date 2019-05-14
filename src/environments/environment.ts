@@ -10,9 +10,9 @@ export class AppSettings {
   // public static Url = 'http://localhost:8085/industrial-transportation-slim/public/public/v1';
   // public static privateUrl = 'http://localhost:8085/industrial-transportation-slim/public//private/v1';
   // public static imageUrl = 'http://localhost:8085/';
-  public static Url = 'http://172.16.9.102/industrial-transportation-slim/public/public/v1';
-  public static privateUrl = 'http://172.16.9.102/industrial-transportation-slim/public/private/v1';
-  public static imageUrl = 'http://172.16.9.102/';
+  public static Url = 'http://172.16.9.123/industrial-transportation-slim/public/public/v1';
+  public static privateUrl = 'http://172.16.9.123/industrial-transportation-slim/public/private/v1';
+  public static imageUrl = 'http://172.16.9.123/';
   public static pattern = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,}$/;
 }
 

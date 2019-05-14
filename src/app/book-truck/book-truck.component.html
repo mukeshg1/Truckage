@@ -1,0 +1,18 @@
+<section id="hero">
+  <div class="login-page" [@routerTransition]>
+    <nav class="nav nav-pills">
+      <ul class="nav-menu">
+          <li style="font-weight: 900;">TRUCKAGE</li>
+          <li><a [routerLink]="['/homepage']">Home</a></li>
+          <li><a [routerLink]="['/login']">{{ 'login' }}</a></li>
+          <li><a [routerLink]="['/signup']">{{ 'Register' }}</a></li>
+          <li class="menu-active"><a [routerLink]="['/bookTruck']">{{ 'Rent a Truck' }}</a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+<footer id="footer">
+    <div class="copyright">
+      &copy; Copyright <strong>Truckage</strong>. All Rights Reserved.
+    </div>
+</footer>

@@ -22,6 +22,10 @@ const routes: Routes = [
         loadChildren: './signup/signup.module#SignupModule'
     },
     {
+        path: 'bookTruck',
+        loadChildren: './book-truck/book-truck.module#BookTruckModule'
+    },
+    {
         path: 'error',
         loadChildren: './server-error/server-error.module#ServerErrorModule'
     },
