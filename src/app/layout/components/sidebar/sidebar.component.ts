@@ -70,7 +70,7 @@ export class SidebarComponent implements OnInit {
 
     logout() {
         this.authenticationService.logout();
-        this.router.navigate(['/homeage']);
+        this.router.navigate(['/homepage']);
     }
 
     userInformation() {

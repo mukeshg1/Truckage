@@ -113,22 +113,16 @@
 
   <!-- Card for Driver Details -->
   <div class="row card-group">
-    <div style="margin-top:10px;" class="col-sm-4" *ngFor="let driver of driverDetails">
-    <div class="card">
+    <div style="margin-top:10px;" class="col-sm-3" *ngFor="let driver of driverDetails">
+    <div class="card border-dark" style="height: 30rem;">
       <div class="card-header">
-        Driver Profile Summary
+        {{ driver.driverName }}
         <i class="fa fa-info-circle fa-2x float-right" aria-hidden="true" placement="left" ngbTooltip="Click here to See more about {{driver.driverName}}" (click)="openDriverDetailsModal(content)"></i>
       </div>
-      <img class="card-img-top image-center" src={{driver.driverImgSrc}} alt="Card image cap">
+      <img style="height: 15rem;" class="card-img-top image-center" src={{driver.driverImgSrc}} alt="Card image cap">
       <div class="card-body">
-        <h5 class="card-title">{{ driver.driverName }}</h5>
-        <hr>
         <div class="card-text">
           <b>{{ driver.driverName }}&nbsp;</b>{{ driver.driverAbout }}
-        </div>
-        <hr>
-        <div class="card-text">
-          Licence Number: <b>{{ driver.driverLicence }}</b>
         </div>
 
         <!-- Modal for Driver Details -->
@@ -149,6 +143,10 @@
           </div>
         </ng-template>
         <!-- <button type="button" class="btn btn-outline-primary btn-block" (click)="openDriverDetailsModal(content)">See more about {{ driver.driverName }}</button> -->
+      </div>
+      
+      <div class="card-footer">
+        Licence Number: <b>{{ driver.driverLicence }}</b>
       </div>
     </div>
   </div>

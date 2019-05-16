@@ -20,5 +20,6 @@ import { UpdateprofileComponent } from './updateprofile/updateprofile.component'
     NgbModule
   ],
   providers: [ CanDeactivateGuard, NgbDatepickerConfig, {provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter} ],
+  exports: [UpdateprofileComponent, ProfileComponent]
 })
 export class ProfileModule { }

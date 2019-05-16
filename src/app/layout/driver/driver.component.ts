@@ -45,6 +45,12 @@ export class DriverComponent implements OnInit {
       driverImgSrc: 'assets/images/faces/face-3.jpg',
       driverAbout: 'is from Jajpur, Odisha and can speak Hindi, English and Odia.',
       driverLicence: 'COMM9826E'
+    },
+    {
+      driverName: ' Mohapatra',
+      driverImgSrc: 'assets/images/faces/face-3.jpg',
+      driverAbout: 'is from Jajpur, Odisha and can speak Hindi, English and Odia.',
+      driverLicence: 'COMM9826E'
     }
   ];
 

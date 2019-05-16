@@ -46,4 +46,8 @@ export class UserserviceService {
   fetchUserInformation() {
     return this.http.get<any>(AppSettings.privateUrl + '/view-user-information');
   }
+
+  fetchTrucks() {
+    return this.http.get<any>(AppSettings.Url + '/viewTrucks');
+  }
 }

@@ -56,6 +56,10 @@ const routes: Routes = [
                 path: 'changepassword',
                 loadChildren: './changepassword/changepassword.module#ChangepasswordModule'
             },
+            {
+                path: 'customerdashboard',
+                loadChildren: './customer-dashboard/customer-dashboard.module#CustomerDashboardModule'
+            }
             // {
             //     path: 'not-found',
             //     loadChildren: '../not-found/not-found.module#NotFoundModule'

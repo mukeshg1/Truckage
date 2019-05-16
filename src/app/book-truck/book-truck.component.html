@@ -3,16 +3,71 @@
     <nav class="nav nav-pills">
       <ul class="nav-menu">
           <li style="font-weight: 900;">TRUCKAGE</li>
-          <li><a [routerLink]="['/homepage']">Home</a></li>
+          <li><a [routerLink]="['/homepage']">{{'Home'}}</a></li>
           <li><a [routerLink]="['/login']">{{ 'login' }}</a></li>
           <li><a [routerLink]="['/signup']">{{ 'Register' }}</a></li>
           <li class="menu-active"><a [routerLink]="['/bookTruck']">{{ 'Rent a Truck' }}</a></li>
       </ul>
     </nav>
+    <h3><span class="badge badge-success">Search Truck</span></h3>
+    <div class="head-body">
+      <p style="text-align: left;"><b><i>Enter details to find the trucks.</i></b></p>
+      <form class="search-form">
+        <div class="form-row">
+          <div class="col-3">
+            <input type="text" class="form-control" placeholder="Enter Source">
+          </div>
+          <div class="col-3">
+            <input type="text" class="form-control" placeholder="Enter Destination">
+          </div>
+          <div class="col-3">
+            <select class="form-control">
+                <option *ngFor="let type of truckTypeList" >{{type}}</option>
+            </select>
+          </div>
+          <div class="col-2">
+              <div class="input-group">
+                  <input class="form-control" placeholder="Select Departure Date" ngbDatepicker #datePicker="ngbDatepicker" (click)="datePicker.toggle()" [minDate]="today">
+                  <div class="input-group-append">
+                    <button class="btn btn-light calendar" (click)="datePicker.toggle()" type="button"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+                  </div>
+                </div>
+            </div>
+          <div class="col-1">
+            <button type="submit" (click)="fetchTrucks()" class="form-control btn btn-dark mb-4">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="card" *ngIf = "truckFoundError">
+      <div class="card-body">
+        Sorry! No trucks available. Please check again later.
+      </div>
+    </div>
+
+    <div class="row card-group" *ngIf = "truckDetails.length > 0">
+      <div style="margin-top:10px;" class="col-sm-3" *ngFor="let truck of truckDetails">
+        <div class="card border-primary">
+          <div class="card-header">
+            <p style="float: left;">License No. <b><i>{{truck.LicenceNumber_xt}}</i></b></p>
+            <p style="float: right; font-weight: bold;">Fare : Rs. 5000</p>
+          </div>
+          <img class="card-img-top image-center" src="assets/images/trucks/truck-0.jpg" alt="Card image cap">
+          <hr>
+          <div class="card-body">
+            <div class="card-text" style="float: left;">
+              <p>{{truck.TruckType_xt}}</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary btn-block">Book Truck</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
-<footer id="footer">
-    <div class="copyright">
-      &copy; Copyright <strong>Truckage</strong>. All Rights Reserved.
-    </div>
-</footer>
+
+
+
