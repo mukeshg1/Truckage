@@ -48,6 +48,10 @@ export class UserserviceService {
   }
 
   fetchTrucks() {
-    return this.http.get<any>(AppSettings.Url + '/viewTrucks');
+    return this.http.get<any>(AppSettings.Url + '/viewUserTrucks');
+  }
+
+  fetchDrivers() {
+    return this.http.get<any>(AppSettings.Url + '/viewDrivers');
   }
 }

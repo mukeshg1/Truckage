@@ -15,38 +15,15 @@ import { UserserviceService } from '../../shared/services/userservice.service';
 })
 export class TruckComponent implements OnInit {
   truckForm: FormGroup;
-  trucks = 4;
+  truckCount = 0;
   page = 1;
   size = 10;
+  truckFoundError = false;
   closeResult: string;
+  _loading = true;
 
   truckTypeList = ['--Select Truck Type--', 'Light Weight Truck', 'Medium Weight Truck', 'Heavy Weight Truck'];
-  truckDetails = [
-    {
-      truckName: 'Heavy Weight Truck',
-      truckImgSrc: 'assets/images/trucks/truck-0.jpg',
-      truckAbout: 'It was manufactured in 2005 A.D. and has completed over 100 trips; total of 19,000 K.M.',
-      truckLicence: 'COMM9823E'
-    },
-    {
-      truckName: 'Light weight Truck',
-      truckImgSrc: 'assets/images/trucks/truck-1.jpg',
-      truckAbout: 'It was manufactured in 2009 A.D. and has completed over 70 trips; total of 14,000 K.M.',
-      truckLicence: 'COMM9824E'
-    },
-    {
-      truckName: 'Tripper Truck',
-      truckImgSrc: 'assets/images/trucks/truck-2.jpg',
-      truckAbout: 'It was manufactured in 2001 A.D. and has completed over 100 trips; total of 19,000 K.M.',
-      truckLicence: 'COMM9825E'
-    },
-    {
-      truckName: 'Medium Weight Truck',
-      truckImgSrc: 'assets/images/trucks/truck-0.jpg',
-      truckAbout: 'It was manufactured in 2015 A.D. and has completed over 100 trips; total of 19,000 K.M.',
-      truckLicence: 'COMM9826E'
-    }
-  ];
+  truckDetails = [];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -68,6 +45,7 @@ export class TruckComponent implements OnInit {
     {
       validators:  MustSelectTruck('truckType')
     });
+    this.fetchTrucks();
   }
 
   get fetchValue() {
@@ -86,6 +64,19 @@ export class TruckComponent implements OnInit {
 
   resetForm() {
     this.truckForm.reset();
+  }
+
+  fetchTrucks() {
+    this.userService.fetchTrucks().subscribe((data: any) => {
+      if (data.error === true) {
+        this.truckFoundError = true;
+      } else {
+        this.truckDetails = data.trucks;
+        this.truckFoundError = false;
+        this.truckCount = this.truckDetails.length;
+      }
+      this._loading = false;
+    });
   }
 
   openTruckDetailsModal(content) {

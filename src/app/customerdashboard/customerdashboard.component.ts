@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-customerdashboard',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerdashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public router: Router,
+    private _authenticationService: AuthenticationService
+  ) { }
 
   ngOnInit() {
   }
+
+  logout() {
+    this._authenticationService.logout();
+    this.router.navigate(['/homepage']);
+}
 
 }

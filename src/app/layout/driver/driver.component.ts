@@ -4,6 +4,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { MustSelectDriver } from '../../shared/helpers/select-type.validator';
+import { UserserviceService } from 'src/app/shared/services/userservice.service';
 
 @Component({
   selector: 'app-driver',
@@ -15,46 +16,20 @@ import { MustSelectDriver } from '../../shared/helpers/select-type.validator';
 export class DriverComponent implements OnInit {
   driverForm: FormGroup;
   submitted = false;
-  drivers = 4;
+  driverCount = 0;
   page = 1;
   size = 10;
   closeResult: string;
+  driverFoundError = false;
+  _loading = true;
 
   driverType = ['--Select Driving License Type--', 'Commercial driving License', 'Non-Commercial driving License'];
-  driverDetails = [
-    {
-      driverName: 'Niraj Prasad',
-      driverImgSrc: 'assets/images/faces/face-0.jpg',
-      driverAbout: 'is from Jamshedpur, Jharkhand and can speak Hindi, English and Odia.',
-      driverLicence: 'COMM9823E'
-    },
-    {
-      driverName: 'Mohit Mahato',
-      driverImgSrc: 'assets/images/faces/face-1.jpg',
-      driverAbout: 'is from Jamshedpur, Jharkhand and can speak Hindi, English and Odia.',
-      driverLicence: 'COMM9824E'
-    },
-    {
-      driverName: 'Sachin Kumar',
-      driverImgSrc: 'assets/images/faces/face-2.jpg',
-      driverAbout: 'is from Bokaro, Jharkhand and can speak Hindi, English and Odia.',
-      driverLicence: 'COMM9825E'
-    },
-    {
-      driverName: 'Ashutosh Mohapatra',
-      driverImgSrc: 'assets/images/faces/face-3.jpg',
-      driverAbout: 'is from Jajpur, Odisha and can speak Hindi, English and Odia.',
-      driverLicence: 'COMM9826E'
-    },
-    {
-      driverName: ' Mohapatra',
-      driverImgSrc: 'assets/images/faces/face-3.jpg',
-      driverAbout: 'is from Jajpur, Odisha and can speak Hindi, English and Odia.',
-      driverLicence: 'COMM9826E'
-    }
-  ];
+  driverDetails = [ ];
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, config: NgbModalConfig) {
+  constructor(private formBuilder: FormBuilder,
+    private modalService: NgbModal,
+    config: NgbModalConfig,
+    private userService: UserserviceService) {
     config.backdrop = 'static';
   }
 
@@ -71,6 +46,7 @@ export class DriverComponent implements OnInit {
     {
       validators: MustSelectDriver('driverLicenseType')
     });
+    this.fetchDrivers();
   }
 
   get fetchValue() {
@@ -85,6 +61,19 @@ export class DriverComponent implements OnInit {
       return;
     }
     alert ('SUCCESS!!:-' + JSON.stringify(this.driverForm.value));
+  }
+
+  fetchDrivers() {
+    this.userService.fetchDrivers().subscribe((data: any) => {
+      if (data.error === true) {
+        this.driverFoundError = true;
+      } else {
+        this.driverDetails = data.drivers;
+        this.driverFoundError = false;
+        this.driverCount = this.driverDetails.length;
+      }
+      this._loading = false;
+    });
   }
 
   openDriverDetailsModal(content) {

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { Router } from '@angular/router';
 
+
+import { UserserviceService } from '../../shared/services/userservice.service';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -12,7 +15,9 @@ export class DashboardComponent implements OnInit {
     public sliders: Array<any> = [];
     public token = '';
 
-    constructor() {
+    constructor(
+        public router: Router,
+        private _userService: UserserviceService) {
         this.sliders.push(
             {
                 imagePath: 'assets/images/slider1.jpg',
@@ -54,6 +59,16 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.selectDashboard();
+    }
+
+    selectDashboard() {
+        this._userService.fetchUserInformation().subscribe((data: any) => {
+            if (data.UserType_xt === '') {
+                this.router.navigate(['/customerdashboard']);
+            }
+        });
+        this.router.navigate(['/customerdashboard']);
     }
 
     public closeAlert(alert: any) {

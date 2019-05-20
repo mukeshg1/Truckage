@@ -1,9 +1,9 @@
 <div [@routerTransition]>
   <app-page-header [heading]="'Trucks'" [icon]="'fa-truck'"></app-page-header>
-  <button type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="You've added {{trucks}} trucks on our system.">
-    Number of Trucks&nbsp;&nbsp;<span class="badge badge-light">{{ trucks }}</span>
+  <button *ngIf = "!_loading" type="button" class="btn btn-primary mr-2" placement="top" ngbTooltip="You've added {{truckCount}} trucks on our system.">
+    Number of Trucks&nbsp;&nbsp;<span class="badge badge-light">{{ truckCount }}</span>
   </button>
-  <button type="button" class="btn btn-primary mr-2 float-right" placement="top" ngbTooltip="Click here to add a truck." (click)="openRegistrationModal(registration)">
+  <button *ngIf = "!_loading" type="button" class="btn btn-primary mr-2 float-right" placement="top" ngbTooltip="Click here to add a truck." (click)="openRegistrationModal(registration)">
     Add Trucks&nbsp;&nbsp;<i class="fa fa-plus" aria-hidden="true"></i>
   </button>
 
@@ -94,24 +94,26 @@
     </form>
   </ng-template>
 
+  <img *ngIf = "_loading" style="height: 50%; width: 50%" class="card-img-top image-center" src='assets/images/loader/loader.gif' alt="No Image.">
+
+  <div class="card border-danger " *ngIf = "truckFoundError" style="margin: 5px 0;">
+    <div class="card-body text-danger font-weight-bold">
+      Oops! You haven't added any trucks. Please add trucks.
+    </div>
+  </div>
+
   <!-- Truck Profile Cards -->
-  <div class="row card-group">
-    <div style="margin-top:10px;" class="col-sm-4" *ngFor="let truck of truckDetails">
-    <div class="shadow card">
+  <div class="row card-group" *ngIf = "!truckFoundError" style="margin: 10px 0;">
+    <div class="col-sm-3" *ngFor="let truck of truckDetails">
+    <div class="shadow card border-primary" style="height: 30rem;">
       <div class="card-header">
-        Truck Profile Summary
-        <i class="fa fa-info-circle fa-2x float-right" aria-hidden="true" placement="left" ngbTooltip="Click here to see more about {{ truck.truckName }}" (click)="openTruckDetailsModal(content)"></i>
+        {{ truck.TruckType_xt }}: <b><i>{{ truck.LicenceNumber_xt }}</i></b>
+        <i class="fa fa-info-circle fa-2x float-right" aria-hidden="true" placement="left" ngbTooltip="Click here to see more about {{ truck.truckName }} {{ truck.truckLicence }}" (click)="openTruckDetailsModal(content)"></i>
       </div>
-      <img class="card-img-top image-center" src={{truck.truckImgSrc}} alt="Card image cap">
+      <img style="height: 15rem; width: 99%" class="card-img-top image-center" src={{truck.truckImgSrc}} alt="No Image.">
       <div class="card-body">
-        <h5 class="card-title">{{ truck.truckName }}</h5>
-        <hr>
         <div class="card-text">
-          {{ truck.truckAbout }}
-        </div>
-        <hr>
-        <div class="card-text">
-          Licence Number: <b>{{ truck.truckLicence }}</b>
+          {{ truck.AboutTruck_xt }}
         </div>
 
         <!-- Modal for Truck details -->
@@ -123,9 +125,9 @@
             </button>
           </div>
           <div class="modal-body">
-            <label>Name:&nbsp;</label><b>{{ truck.truckName }}</b><br>
-            <label>About:&nbsp;</label><b>{{ truck.truckAbout }}</b><br>
-            <label>Licence No.:&nbsp;</label><b>{{ truck.truckLicence }}</b>
+            <label>Truck Type:&nbsp;</label><b>{{ truck.TruckType_xt }}</b><br>
+            <label>About:&nbsp;</label><b>{{ truck.AboutTruck_xt }}</b><br>
+            <label>Licence No.:&nbsp;</label><b>{{ truck.LicenceNumber_xt }}</b>
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
@@ -133,12 +135,15 @@
         </ng-template>
         <!-- <button type="button" class="btn btn-outline-primary btn-block" (click)="openTruckDetailsModal(content)">See more about {{ truck.truckName }}</button> -->
       </div>
+      <div class="card-footer">
+        Licence Number: <b>{{ truck.LicenceNumber_xt }}</b>
+      </div>
     </div>
   </div>
   </div>
 
 
-  <ngb-pagination class="d-flex justify-content-end" [collectionSize]="size" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"></ngb-pagination>
-  <div style="margin-top:5px" class="card-header"><b>You're in page: {{page}}</b></div>
+  <ngb-pagination *ngIf = "!_loading" class="d-flex justify-content-end" [collectionSize]="size" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"></ngb-pagination>
+  <div *ngIf = "!_loading" style="margin-top:5px" class="card-header"><b>You're in page: {{page}}</b></div>
 </div>
 

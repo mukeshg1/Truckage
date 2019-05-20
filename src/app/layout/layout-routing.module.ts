@@ -57,7 +57,7 @@ const routes: Routes = [
                 loadChildren: './changepassword/changepassword.module#ChangepasswordModule'
             },
             {
-                path: 'customerdashboard',
+                path: 'customerd',
                 loadChildren: './customer-dashboard/customer-dashboard.module#CustomerDashboardModule'
             }
             // {

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 import { routerTransition } from '../router.animations';
 import { UserserviceService } from '../shared/services/userservice.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'app-book-truck',
@@ -17,14 +19,19 @@ export class BookTruckComponent implements OnInit {
   truckDetails = [];
   truckTypeList = ['--Select Truck Type--', 'Light Weight Truck', 'Medium Weight Truck', 'Heavy Weight Truck'];
   truckFoundError = false;
+  _loading = false;
+  loggedIn = false;
 
   constructor(
     private calendar: NgbCalendar,
-    private userService: UserserviceService
+    private userService: UserserviceService,
+    private _authService: AuthenticationService,
+    public router: Router
   ) { }
 
   ngOnInit() {
     this.selectToday();
+    this.checkLogIn();
   }
 
   selectToday() {
@@ -33,6 +40,7 @@ export class BookTruckComponent implements OnInit {
   }
 
   fetchTrucks() {
+    this._loading = true;
     this.truckDetails = [];
     this.userService.fetchTrucks().subscribe((data: any) => {
       if (data.error === true) {
@@ -41,6 +49,19 @@ export class BookTruckComponent implements OnInit {
         this.truckDetails = data.trucks;
         this.truckFoundError = false;
       }
+      this._loading = false;
     });
   }
+
+  checkLogIn() {
+    if (localStorage.getItem('currentUser')) {
+      this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
+    }
+  }
+  logout() {
+    this._authService.logout();
+    this.router.navigate(['/homepage']);
+}
 }

@@ -38,6 +38,11 @@ const routes: Routes = [
         loadChildren: './not-found/not-found.module#NotFoundModule'
     },
     {
+        path: 'customerdashboard',
+        loadChildren: './customerdashboard/customerdashboard.module#CustomerdashboardModule',
+        canActivate: [AuthGuard]
+    },
+    {
         path: '**',
         redirectTo: ''
     }

@@ -1,6 +1,6 @@
 <section id="hero">
   <div class="login-page" [@routerTransition]>
-    <nav class="nav nav-pills">
+    <nav class="nav nav-pills" *ngIf = "!loggedIn">
       <ul class="nav-menu">
           <li style="font-weight: 900;">TRUCKAGE</li>
           <li><a [routerLink]="['/homepage']">{{'Home'}}</a></li>
@@ -8,6 +8,37 @@
           <li><a [routerLink]="['/signup']">{{ 'Register' }}</a></li>
           <li class="menu-active"><a [routerLink]="['/bookTruck']">{{ 'Rent a Truck' }}</a></li>
       </ul>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg fixed-top" *ngIf = "loggedIn">
+      <img src="assets/images/logotruck.png" width="40px" class="user-avatar" />&nbsp;
+      <a class="navbar-brand" style="color: white;" [routerLink]="['/bookTruck']"><b>TRUCKAGE</b></a>
+      <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+          <!-- <span class="navbar-toggler-icon"></span> -->
+          <i class="fa fa-bars text-muted" aria-hidden="true"></i>
+      </button>
+      <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown" ngbDropdown>
+                  <a class="nav-link dropdown-toggle" style="width:200px;" ngbDropdownToggle>
+                      <i class="fa fa-user"></i>&nbsp;&nbsp;{{ UserName }}<b class="caret"></b>
+                  </a>
+                  <div class=" dropdown-menu" ngbDropdownMenu>
+                    <a class="dropdown-item" [routerLink]="['/customerdashboard']" ngbDropdownItem>
+                      <i class="fa fa-fw fa-user"></i> {{ 'Profile' }}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" [routerLink]="['/changepassword']" ngbDropdownItem>
+                        <i class="fa fa-fw fa-gear"></i> {{ 'Change Password' }}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" [routerLink]="['/login']" (click)="logout()" ngbDropdownItem>
+                        <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' }}
+                    </a>
+                  </div>
+              </li>
+          </ul>
+      </div>
     </nav>
     <h3><span class="badge badge-success">Search Truck</span></h3>
     <div class="head-body">
@@ -39,6 +70,8 @@
         </div>
       </form>
     </div>
+
+    <img *ngIf = "_loading" style="height: 40%; width: 15%; float: center;" class="card-img-top image-center" src='assets/images/loader/searchloader.gif' alt="No Image.">
 
     <div class="card" *ngIf = "truckFoundError">
       <div class="card-body">
