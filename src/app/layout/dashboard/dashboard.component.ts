@@ -59,7 +59,6 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.selectDashboard();
     }
 
     selectDashboard() {

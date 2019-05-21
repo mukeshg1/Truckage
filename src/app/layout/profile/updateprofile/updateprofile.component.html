@@ -38,7 +38,7 @@
       <div class="form-group">
         <label>Date of Birth*</label>
         <div class="input-group">
-          <input class="form-control border-input" type="date" formControlName="dob" ngbDatepicker #datePicker="ngbDatepicker" placeholder="Date of Birth" [ngClass]="{ 'is-invalid': fetchValue.dob.invalid && (fetchValue.dob.dirty || fetchValue.dob.touched) }">
+          <input class="form-control border-input" formControlName="dob" ngbDatepicker #datePicker="ngbDatepicker" (click)="datePicker.toggle()" placeholder="Date of Birth" [ngClass]="{ 'is-invalid': fetchValue.dob.invalid && (fetchValue.dob.dirty || fetchValue.dob.touched) }">
           <div class="input-group-append">
             <button type="button" class="form-control border-input btn btn-outline-secondary calendar" (click)="datePicker.toggle()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
           </div>

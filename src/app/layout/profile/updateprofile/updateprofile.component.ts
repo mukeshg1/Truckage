@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
 import { MustSelectGender, MustSelectId } from '../../../shared/helpers/select-type.validator';
 import { UserserviceService } from '../../../shared/services/userservice.service';
 
@@ -16,13 +18,15 @@ export class UpdateprofileComponent implements OnInit {
   uploadPercent = 0;
   selectedFile: File;
   lock = false;
+  date: {year: number, month: number, day: number};
 
   Gender: string[] = ['--Select Gender--', 'Male', 'Female'];
 
   idType: string[] = ['--Select Id Type--', 'Aadhar Card', 'Voter Card', 'PAN Card', 'Passport'];
 
   constructor(private formBuilder: FormBuilder,
-    private userService: UserserviceService) { }
+    private userService: UserserviceService,
+    private _calendar: NgbCalendar) { }
 
   ngOnInit() {
     this.userInformation();
@@ -55,10 +59,9 @@ export class UpdateprofileComponent implements OnInit {
     if (this.profileForm.invalid) {
       return;
     }
-    // const payload = Object.assign({}, this.profileForm.value);
-    // payload.dob = this.profileForm.value.dob.month + '/' + this.profileForm.value.dob.day + '/' + this.profileForm.value.dob.year;
-    // console.log('payload = ', payload);
-    this.userService.updateProfile(this.profileForm.value).subscribe( (res: any) => {
+    const payload = Object.assign({}, this.profileForm.value);
+    payload.dob = this.profileForm.value.dob.month + '/' + this.profileForm.value.dob.day + '/' + this.profileForm.value.dob.year;
+    this.userService.updateProfile(payload).subscribe( (res: any) => {
       window.alert(res.message);
       location.reload();
     },
@@ -88,10 +91,12 @@ export class UpdateprofileComponent implements OnInit {
   userInformation() {
     this.userService.fetchUserInformation().subscribe((data: any) => {
     this.lock = !this.lock;
+    console.log(data.Information.DateOfBirth_xd.substring(3, 5));
     this.profileForm.patchValue({
       // companyName: data.Information.Email_xt,
       gender: data.Information.Gender_xt,
-      dob: data.Information.DateOfBirth_xd,
+      dob: {year: Number(data.Information.DateOfBirth_xd.substring(6, 10)), month: Number(data.Information.DateOfBirth_xd.substring(0, 2)),
+        day: Number(data.Information.DateOfBirth_xd.substring(3, 5))},
       mobileNumber: data.Information.Mobile_xn,
       idType: data.Information.GovernmentIdType_xt,
       idNumber: data.Information.GovernmentIdNumber_xt,
@@ -102,11 +107,12 @@ export class UpdateprofileComponent implements OnInit {
       country: data.Address.Country_xt,
       postalCode: data.Address.Pincode_xn
     });
+    console.log(data.Information.DateOfBirth_xd);
   },
   error => {
     this.lock = !this.lock;
     console.log(error);
-    this.error = 'Error fetching data. Please try again later.';
+    this.error = 'Error fetching data! Please try again later.';
   });
   }
 
