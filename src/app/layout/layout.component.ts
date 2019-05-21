@@ -23,12 +23,7 @@ export class LayoutComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        if (!localStorage.getItem('currentUser')) {
-            this.selectDashboard();
-        } else {
-            this._loading = false;
-        }
-        // this.fillUserInformation();
+        this.selectDashboard();
     }
 
     receiveCollapsed($event) {
@@ -44,9 +39,5 @@ export class LayoutComponent implements OnInit {
             }
         });
         this._loading = false;
-    }
-
-    public fillUserInformation(): void {
-        this._updateProfile.userInformation();
     }
 }

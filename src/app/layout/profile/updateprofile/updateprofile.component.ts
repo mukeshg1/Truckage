@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-
 import { MustSelectGender, MustSelectId } from '../../../shared/helpers/select-type.validator';
 import { UserserviceService } from '../../../shared/services/userservice.service';
 
@@ -25,8 +23,8 @@ export class UpdateprofileComponent implements OnInit {
   idType: string[] = ['--Select Id Type--', 'Aadhar Card', 'Voter Card', 'PAN Card', 'Passport'];
 
   constructor(private formBuilder: FormBuilder,
-    private userService: UserserviceService,
-    private _calendar: NgbCalendar) { }
+    private userService: UserserviceService
+    ) { }
 
   ngOnInit() {
     this.userInformation();
@@ -51,6 +49,7 @@ export class UpdateprofileComponent implements OnInit {
       validators: [MustSelectGender('gender'), MustSelectId('idType')]
     });
   }
+
   get fetchValue() {
     return this.profileForm.controls;
   }
@@ -91,7 +90,6 @@ export class UpdateprofileComponent implements OnInit {
   userInformation() {
     this.userService.fetchUserInformation().subscribe((data: any) => {
     this.lock = !this.lock;
-    console.log(data.Information.DateOfBirth_xd.substring(3, 5));
     this.profileForm.patchValue({
       // companyName: data.Information.Email_xt,
       gender: data.Information.Gender_xt,
@@ -107,7 +105,6 @@ export class UpdateprofileComponent implements OnInit {
       country: data.Address.Country_xt,
       postalCode: data.Address.Pincode_xn
     });
-    console.log(data.Information.DateOfBirth_xd);
   },
   error => {
     this.lock = !this.lock;

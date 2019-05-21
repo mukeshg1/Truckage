@@ -8,7 +8,6 @@ import { UserserviceService } from '../../shared/services/userservice.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { FormCanDeactivate } from '../../shared/formGuard/form-can-deactivate';
 import { AppSettings } from '../../../environments/environment';
-import { MustSelectGender, MustSelectId } from '../../shared/helpers/select-type.validator';
 
 @Component({
   selector: 'app-profile',
@@ -28,6 +27,7 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
   url = '';
   uploadData: FormData;
   uploadPercent = 0;
+  _loading = true;
 
   constructor(private formBuilder: FormBuilder, private userService: UserserviceService,
     private authService: AuthenticationService) {
@@ -65,9 +65,6 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
       } else if (upload.type === HttpEventType.Response) {
         console.log(upload);
       }
-      // if (this.uploadPercent === 100) {
-      //   this.getImage();
-      // }
     },
     error => {
       console.log(error);
@@ -84,7 +81,7 @@ export class ProfileComponent extends FormCanDeactivate implements OnInit {
     this.userService.fetchUserInformation().subscribe((data: any) => {
     this.UserName = data.Information.UserFirstName_xt + ' ' + data.Information.UserLastName_xt;
     this.UserEmail = data.Information.Email_xt;
-
+    this._loading = false;
     });
   }
 

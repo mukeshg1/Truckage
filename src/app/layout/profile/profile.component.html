@@ -1,5 +1,5 @@
-<!-- <img *ngIf = "_loading" style="height: 50%; width: 50%" class="card-img-top image-center" src='assets/images/loader/loader.gif' alt="No Image."> -->
-<div [@routerTransition]>
+<img *ngIf = "_loading" style="height: 50%; width: 50%; margin-left: 25%" class="card-img-top image-center" src='assets/images/loader/loader.gif' alt="No Image.">
+<div [@routerTransition] *ngIf = "!_loading">
   <app-page-header [heading]="'Profile'" [icon]="'fa-user'"></app-page-header>
   <div class="row">
     <div class="container-fluid">
