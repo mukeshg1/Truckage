@@ -6,6 +6,7 @@ import { first } from 'rxjs/operators';
 import { routerTransition } from '../router.animations';
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { RegisterData } from '../shared/models/data';
+import { UserserviceService } from '../shared/services/userservice.service';
 
 @Component({
     selector: 'app-login',
@@ -25,12 +26,14 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         public router: Router,
         private authenticationService: AuthenticationService,
-        private route: ActivatedRoute ) {  }
+        private route: ActivatedRoute,
+        private _userService: UserserviceService ) {  }
 
     ngOnInit() {
         if (localStorage.getItem('currentUser')) {
-            this.router.navigate(['/dashboard']);
+            this.selectDashboard();
         }
+        this.selectDashboard();
         this.loginForm = this.formBuilder.group({
             loginEmail: ['', [Validators.required, Validators.email]],
             loginPassword: ['', Validators.required]
@@ -62,5 +65,15 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
         });
 
+    }
+
+    selectDashboard() {
+        this._userService.fetchUserInformation().subscribe((data: any) => {
+            if (data.Information.UserType_xt === 'Vehicle Owner/Client') {
+                this.router.navigate(['/dashboard']);
+            } else {
+                this.router.navigate(['/customerdashboard']);
+            }
+        });
     }
 }

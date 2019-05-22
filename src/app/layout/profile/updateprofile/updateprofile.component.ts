@@ -108,7 +108,6 @@ export class UpdateprofileComponent implements OnInit {
   },
   error => {
     this.lock = !this.lock;
-    console.log(error);
     this.error = 'Error fetching data! Please try again later.';
   });
   }

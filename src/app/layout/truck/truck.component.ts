@@ -56,9 +56,16 @@ export class TruckComponent implements OnInit {
     if (this.truckForm.invalid) {
       return;
     }
-    alert ('SUCCESS!!:-' + JSON.stringify(this.truckForm.value));
-    this.userService.truckProfile(this.truckForm.value).subscribe((data: any) => {
-      console.log(data);
+    const payload = Object.assign({}, this.truckForm.value);
+    payload.truckManufacturedDate = this.truckForm.value.truckManufacturedDate.month +
+    '/' + this.truckForm.value.truckManufacturedDate.day + '/' + this.truckForm.value.truckManufacturedDate.year;
+    this.userService.truckProfile(payload).subscribe((data: any) => {
+      alert(data.message);
+      this.fetchTrucks();
+      this.modalService.dismissAll();
+    },
+    error => {
+      alert(error);
     });
   }
 
@@ -75,6 +82,10 @@ export class TruckComponent implements OnInit {
         this.truckFoundError = false;
         this.truckCount = this.truckDetails.length;
       }
+      this._loading = false;
+    },
+    error => {
+      alert(error);
       this._loading = false;
     });
   }

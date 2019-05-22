@@ -48,10 +48,10 @@ export class UserserviceService {
   }
 
   fetchTrucks() {
-    return this.http.get<any>('http://localhost:8080/SlimTruckage/public/api/viewUserTrucks');
+    return this.http.get<any>(AppSettings.privateUrl + '/fetch-truck-information');
   }
 
   fetchDrivers() {
-    return this.http.get<any>('http://localhost:8080/SlimTruckage/public/api/viewDrivers');
+    return this.http.get<any>(AppSettings.privateUrl + '/fetch-driver-information');
   }
 }

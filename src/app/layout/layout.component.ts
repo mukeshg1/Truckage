@@ -14,7 +14,7 @@ import { UpdateprofileComponent } from './profile/updateprofile/updateprofile.co
 export class LayoutComponent implements OnInit {
 
     collapedSideBar: boolean;
-    _loading = true;
+    _loading = false;
 
     constructor(
         public router: Router,
@@ -23,7 +23,7 @@ export class LayoutComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.selectDashboard();
+        // this.selectDashboard();
     }
 
     receiveCollapsed($event) {
