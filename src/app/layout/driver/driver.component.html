@@ -131,7 +131,7 @@
       <img style="height: 15rem; width: 99%" class="card-img-top image-center" src={{driver.driverImgSrc}} alt="No Image.">
       <div class="card-body">
         <div class="card-text">
-          <b>{{ driver.DriverName_xt }}&nbsp;</b>{{ driver.AboutDriver_xt }}
+          <b>{{ driver.DriverName_xt }}&nbsp;</b>is a {{ driver.DrivingLicenceType_xt }} License holder.
         </div>
 
         <!-- Modal for Driver Details -->
@@ -144,8 +144,8 @@
           </div>
           <div class="modal-body">
             <label>Name:&nbsp;</label><b>{{ driver.DriverName_xt }}</b><br>
-            <label>About:&nbsp;</label><b>{{ driver.DriverName_xt }}&nbsp;{{ driver.AboutDriver_xt }}</b><br>
-            <label>Licence No.:&nbsp;</label><b>{{ driver.DrivingLicenceNumber_xn }}</b>
+            <label>About:&nbsp;</label><b>{{ driver.DriverName_xt }}&nbsp; is a {{ driver.DrivingLicenceType_xt }} License holder.</b><br>
+            <label>Licence No.:&nbsp;</label><b>{{ driver.DrivingLicenceNumber_xt }}</b>
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary" (click)="modal.close('Close Click')">Close</button>
@@ -155,7 +155,7 @@
       </div>
       
       <div class="card-footer">
-        Licence Number: <b>{{ driver.DrivingLicenceNumber_xn }}</b>
+        Licence Number: <b>{{ driver.DrivingLicenceNumber_xt }}</b>
       </div>
     </div>
   </div>

@@ -37,6 +37,10 @@ export class UserserviceService {
     return this.http.post(AppSettings.privateUrl + '/update-truck-information', truckData);
   }
 
+  driverProfile(driverData: any) {
+    return this.http.post(AppSettings.privateUrl + '/add-driver-information', driverData);
+  }
+
 
   fileView() {
     return this.http.get<any>(AppSettings.privateUrl + '/view-document/ProfilePic');

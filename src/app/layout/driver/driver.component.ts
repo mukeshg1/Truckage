@@ -60,7 +60,19 @@ export class DriverComponent implements OnInit {
     if (this.driverForm.invalid) {
       return;
     }
-    alert ('SUCCESS!!:-' + JSON.stringify(this.driverForm.value));
+    const payload = Object.assign({}, this.driverForm.value);
+    payload.licenseIssuedDate = this.driverForm.value.licenseIssuedDate.month +
+    '/' + this.driverForm.value.licenseIssuedDate.day + '/' + this.driverForm.value.licenseIssuedDate.year;
+    payload.licenseExpiryDate = this.driverForm.value.licenseExpiryDate.month +
+    '/' + this.driverForm.value.licenseExpiryDate.day + '/' + this.driverForm.value.licenseExpiryDate.year;
+    this.userService.driverProfile(payload).subscribe((data: any) => {
+      alert('Successfully Registered.');
+      this.fetchDrivers();
+      this.modalService.dismissAll();
+    },
+    error => {
+      alert(error);
+    });
   }
 
   fetchDrivers() {

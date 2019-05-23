@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         if (localStorage.getItem('currentUser')) {
             this.selectDashboard();
         }
-        this.selectDashboard();
+        // this.selectDashboard();
         this.loginForm = this.formBuilder.group({
             loginEmail: ['', [Validators.required, Validators.email]],
             loginPassword: ['', Validators.required]
